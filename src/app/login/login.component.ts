@@ -24,7 +24,8 @@ export class LoginComponent implements OnInit {
     this._service.loginUserFromRemote(this.user).subscribe(
       data => {
         console.log("response received");
-        this._router.navigate(['/loginsuccess'])
+        localStorage.setItem("loggedUser", JSON.stringify(data));
+        this._router.navigate(['/loginsuccess']);
       },
       error => {
         console.log("exception occured");

@@ -11,8 +11,6 @@ export class MestoService {
   constructor(private _http: HttpClient) { }
 
   getMesta(): Observable<any>{
-    return this._http.get<Mesto>("http://localhost:8090/mesto")
-    .pipe();
+    return this._http.get<Mesto>("http://localhost:8090/mesto");
   } 
 }
-//catchError(this.handleError('getProject',[])
