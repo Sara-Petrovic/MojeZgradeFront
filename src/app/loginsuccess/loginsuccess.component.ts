@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { StambenaZajednica } from '../model/stambena-zajednica';
+import { StambenaZajednicaService } from '../services/stambena-zajednica.service';
 
 @Component({
   selector: 'app-loginsuccess',
@@ -7,9 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginsuccessComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _router:Router) { }
 
   ngOnInit(): void {
+  }
+
+  openSaveStambenaZajednica(){
+    this._router.navigate(['/stambenazajednica']);
   }
 
 }

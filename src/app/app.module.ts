@@ -8,13 +8,15 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { LoginsuccessComponent } from './loginsuccess/loginsuccess.component';
+import { StambenazajednicaComponent } from './stambenazajednica/stambenazajednica.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegistrationComponent,
-    LoginsuccessComponent
+    LoginsuccessComponent,
+    StambenazajednicaComponent
   ],
   imports: [
     BrowserModule,
