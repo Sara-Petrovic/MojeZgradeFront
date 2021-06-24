@@ -1,7 +1,8 @@
 <p>login works!</p>
 <div class="container">
-    <h2>Vertical (basic) form</h2>
+    <h2>Moje zgrade</h2>
     <form #loginform="ngForm" (ngSubmit)="loginUser()"> 
+        <small class="text-danger">{{msg}}</small>
       <div class="form-group">
         <label for="email">Email:</label>
         <input type="email" class="form-control" placeholder="Enter email" name="email" [(ngModel)]="user.email">
