@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { LoginsuccessComponent } from './loginsuccess/loginsuccess.component';
 import { StambenazajednicaComponent } from './stambenazajednica/stambenazajednica.component';
+import { VlasnikComponent } from './vlasnik/vlasnik.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { StambenazajednicaComponent } from './stambenazajednica/stambenazajednic
     LoginComponent,
     RegistrationComponent,
     LoginsuccessComponent,
-    StambenazajednicaComponent
+    StambenazajednicaComponent,
+    VlasnikComponent
   ],
   imports: [
     BrowserModule,

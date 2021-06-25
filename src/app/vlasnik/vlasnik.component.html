@@ -1,0 +1,53 @@
+<div class="container">
+    <h2>Moje zgrade</h2>
+    <form #vlasnikform="ngForm" (ngSubmit)="saveVlasnikPosebnogDela()">
+        <small class="text-danger">{{msg}}</small>
+
+        <div class="form-group">
+            <label for="stambenaZajednica">Stambena zajednica:</label>
+            <!--<select [(ngModel)]="selectedMesto" (change)="selected()" class="form-control" name="mesto" >
+                <option *ngFor="let m of mesto" [value]="m" [ngValue]="m" id="{{m.mestoId}}"> {{m.naziv}}</option>
+            </select>-->
+        </div>
+
+        <div class="form-group">
+            <label for="ime">Ime:</label>
+            <input type="text" class="form-control" placeholder="Unesite ime" name="ime" [(ngModel)]="vlasnik.ime">
+        </div>
+
+        <div class="form-group">
+            <label for="prezime">Prezime:</label>
+            <input type="text" class="form-control" placeholder="Unesite prezime" name="prezime"
+                [(ngModel)]="vlasnik.prezime">
+        </div>
+
+        <div class="form-group">
+            <label for="broj">Broj posebnog dela:</label>
+            <input type="text" class="form-control" placeholder="Unesite broj posebnog dela" name="broj"
+                [(ngModel)]="vlasnik.brojPosebnogDela">
+        </div>
+
+        <div class="form-group">
+            <label for="velicina">Velicina posebnog dela:</label>
+            <input type="number" class="form-control" placeholder="Unesite velicinu posebnog dela" name="velicina"
+                [(ngModel)]="vlasnik.velicinaPosebnogDela">
+        </div>
+
+        <div class="form-group">
+            <label for="mernaJedinica">Merna jedinica:</label>
+            <select id="propertyType"class="form-control" >
+                <option [ngValue]="null">Select one...</option>
+                <option *ngFor="let type of propertyType | keyvalue" [ngValue]="type.value">{{type.value}}</option>
+              </select>
+        </div>
+
+        <div class="form-group">
+            <label for="pib">Kontakt vlasnika:</label>
+            <input type="text" class="form-control" placeholder="Unesite kontakt vlasnika" name="kontakt"
+                [(ngModel)]="vlasnik.kontaktVlasnika">
+        </div>
+
+
+        <button type="submit" class="btn btn-info">Save</button>
+    </form>
+</div>
