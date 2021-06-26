@@ -5,9 +5,9 @@
 
         <div class="form-group">
             <label for="stambenaZajednica">Stambena zajednica:</label>
-            <!--<select [(ngModel)]="selectedMesto" (change)="selected()" class="form-control" name="mesto" >
-                <option *ngFor="let m of mesto" [value]="m" [ngValue]="m" id="{{m.mestoId}}"> {{m.naziv}}</option>
-            </select>-->
+            <select [(ngModel)]="selectedStambenaZajednica" (change)="selected()" class="form-control" name="stambenaZajednica" >
+                <option *ngFor="let sz of stambeneZajednice" [value]="sz" [ngValue]="sz" id="{{sz.ulica}}"> {{sz.ulica}} {{sz.broj}}, {{sz.mesto.naziv}} </option>
+            </select>
         </div>
 
         <div class="form-group">
@@ -35,9 +35,9 @@
 
         <div class="form-group">
             <label for="mernaJedinica">Merna jedinica:</label>
-            <select id="propertyType"class="form-control" >
-                <option [ngValue]="null">Select one...</option>
-                <option *ngFor="let type of propertyType | keyvalue" [ngValue]="type.value">{{type.value}}</option>
+            <select [(ngModel)]="selectedJedinicaMere" class="form-control"  (change)="selectedMernaJedinica()" name="sz" >
+               <!-- <option [ngValue]="null">Select one...</option>-->
+                <option  *ngFor="let jm of jediniceMere | keyvalue" [value]="jm.value"  [ngValue]="jm.value">{{jm.value}}</option>
               </select>
         </div>
 

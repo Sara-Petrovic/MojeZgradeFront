@@ -18,5 +18,8 @@ export class LoginsuccessComponent implements OnInit {
   openSaveStambenaZajednica(){
     this._router.navigate(['/stambenazajednica']);
   }
+  openSaveVlasnikPosebnogDela(){
+    this._router.navigate(['/vlasnikposebnogdela']);
+  }
 
 }
