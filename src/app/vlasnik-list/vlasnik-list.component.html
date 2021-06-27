@@ -1,0 +1,29 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+      <h2>Lista vlasnika</h2>
+    </div>
+    <div class="panel-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Ime</th>
+            <th>Prezime</th>
+            <th>Broj stana</th>
+            <th>Stambena zajednica</th>
+            <th>Akcije</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let vlasnik of vlasnici | async">
+            <td>{{vlasnik.ime}}</td>
+            <td>{{vlasnik.prezime}}</td>
+            <td>{{vlasnik.brojPosebnogDela}}</td>
+            <td>{{vlasnik.stambenaZajednica.ulica}} {{vlasnik.stambenaZajednica.broj}},{{vlasnik.stambenaZajednica.mesto.naziv}}</td>
+            <td><button (click)="deleteVlasnik(vlasnik.vlasnikId)" class="btn btn-danger">Delete</button>
+                <button (click)="vlasnikDetails(vlasnik.vlasnikId)" class="btn btn-info" style="margin-left: 10px">Details</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

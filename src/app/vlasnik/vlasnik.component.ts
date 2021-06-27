@@ -27,10 +27,10 @@ export class VlasnikComponent implements OnInit {
     private _router: Router) { }
 
   ngOnInit(): void {
-    this.fillComboBoxMesta();
+    this.fillComboBoxStambenaZajednica();
   }
 
-  fillComboBoxMesta(): void {
+  fillComboBoxStambenaZajednica(): void {
     this._serviceSZ.getAllStambenaZajednicaFromRemote()
       .subscribe(stambeneZajednice => { this.stambeneZajednice = stambeneZajednice; console.log(stambeneZajednice) });
   }
@@ -52,7 +52,7 @@ export class VlasnikComponent implements OnInit {
     this._service.saveVlasnikPosebnogDelaFromRemote(this.vlasnik).subscribe(
       data => {
         console.log("saved vlasnik");
-        this._router.navigate(['/loginsuccess'])
+        this._router.navigate(['/vlasnici'])
       },
       error => {
         console.log("exception occured");

@@ -10,6 +10,9 @@ import { RegistrationComponent } from './registration/registration.component';
 import { LoginsuccessComponent } from './loginsuccess/loginsuccess.component';
 import { StambenazajednicaComponent } from './stambenazajednica/stambenazajednica.component';
 import { VlasnikComponent } from './vlasnik/vlasnik.component';
+import { VlasnikListComponent } from './vlasnik-list/vlasnik-list.component';
+import { VlasnikDetailsComponent } from './vlasnik-details/vlasnik-details.component';
+import { VlasnikUpdateComponent } from './vlasnik-update/vlasnik-update.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,10 @@ import { VlasnikComponent } from './vlasnik/vlasnik.component';
     RegistrationComponent,
     LoginsuccessComponent,
     StambenazajednicaComponent,
-    VlasnikComponent
+    VlasnikComponent,
+    VlasnikListComponent,
+    VlasnikDetailsComponent,
+    VlasnikUpdateComponent
   ],
   imports: [
     BrowserModule,
