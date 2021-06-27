@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Mesto } from '../model/mesto';
+import { StambenaZajednica } from '../model/stambena-zajednica';
 import { VlasnikPosebnogDela } from '../model/vlasnik-posebnog-dela';
 import { VlasnikPosebnogDelaService } from '../services/vlasnik-posebnog-dela.service';
 
@@ -18,13 +20,15 @@ export class VlasnikDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.vlasnik = new VlasnikPosebnogDela();
-
+    this.vlasnik.stambenaZajednica = new StambenaZajednica();
+    this.vlasnik.stambenaZajednica.mesto = new Mesto(0, "", "");
     this.vlasnikId = this.route.snapshot.params['id'];
 
     this.vlasnikService.getVlasnikPosebnogDelaFromRemote(this.vlasnikId)
       .subscribe(data => {
         console.log(data)
         this.vlasnik = data;
+
       }, error => console.log(error));
   }
 

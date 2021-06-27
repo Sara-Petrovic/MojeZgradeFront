@@ -37,5 +37,8 @@ export class VlasnikListComponent implements OnInit {
   vlasnikDetails(id: number){
     this.router.navigate(['detailsvlasnik', id]);
   }
+  vlasnikUpdate(id: number){
+    this.router.navigate(['updatevlasnik', id]);
+  }
 
 }

@@ -21,6 +21,7 @@
             <td>{{vlasnik.stambenaZajednica.ulica}} {{vlasnik.stambenaZajednica.broj}},{{vlasnik.stambenaZajednica.mesto.naziv}}</td>
             <td><button (click)="deleteVlasnik(vlasnik.vlasnikId)" class="btn btn-danger">Delete</button>
                 <button (click)="vlasnikDetails(vlasnik.vlasnikId)" class="btn btn-info" style="margin-left: 10px">Details</button>
+                <button (click)="vlasnikUpdate(vlasnik.vlasnikId)" class="btn btn-info" style="margin-left: 10px">Update</button>
             </td>
           </tr>
         </tbody>
