@@ -12,12 +12,14 @@ import { VlasnikPosebnogDelaService } from '../services/vlasnik-posebnog-dela.se
 export class VlasnikListComponent implements OnInit {
 
   vlasnici: Observable<VlasnikPosebnogDela[]>;
+  prezime: string;
 
   constructor(private vlasnikService: VlasnikPosebnogDelaService,
-    private router: Router) {}
+    private router: Router) { }
 
   ngOnInit() {
     this.reloadData();
+    this.prezime = "";
   }
 
   reloadData() {
@@ -34,11 +36,18 @@ export class VlasnikListComponent implements OnInit {
         error => console.log(error));
   }
 
-  vlasnikDetails(id: number){
+  vlasnikDetails(id: number) {
     this.router.navigate(['detailsvlasnik', id]);
   }
-  vlasnikUpdate(id: number){
+  vlasnikUpdate(id: number) {
     this.router.navigate(['updatevlasnik', id]);
+  }
+  findVlasnikByPrezime() {
+    if (this.prezime == "") {
+      this.vlasnici = this.vlasnikService.getAllVlasnikPosebnogDelaFromRemote();
+    } else {
+      this.vlasnici = this.vlasnikService.getVlasnikByPrezimeFromRemote(this.prezime);
+    }
   }
 
 }

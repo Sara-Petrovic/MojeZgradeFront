@@ -22,6 +22,10 @@ export class VlasnikPosebnogDelaService {
     return this._http.get<any>("http://localhost:8090/vlasnikposebnogdela/"+ vlasnikId);
 
   }
+  getVlasnikByPrezimeFromRemote(vlasnikPrezime:string){
+    return this._http.get<any>("http://localhost:8090/findvlasnikbyprezime/"+ vlasnikPrezime);
+
+  }
   updateVlasnikPosebnogDelaFromRemote(vlasnikId:number, newVlasnik: VlasnikPosebnogDela){
     return this._http.put<any>("http://localhost:8090/vlasnikposebnogdela/"+vlasnikId, newVlasnik);
   }
