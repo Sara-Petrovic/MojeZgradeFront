@@ -13,6 +13,10 @@ import { VlasnikComponent } from './vlasnik/vlasnik.component';
 import { VlasnikListComponent } from './vlasnik-list/vlasnik-list.component';
 import { VlasnikDetailsComponent } from './vlasnik-details/vlasnik-details.component';
 import { VlasnikUpdateComponent } from './vlasnik-update/vlasnik-update.component';
+import { CreateSednicaComponent } from './create-sednica/create-sednica.component';
+import { SednicaCreateComponent } from './sednica-create/sednica-create.component';
+import { SednicaListComponent } from './sednica-list/sednica-list.component';
+import { SednicaDetailsComponent } from './sednica-details/sednica-details.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +28,11 @@ import { VlasnikUpdateComponent } from './vlasnik-update/vlasnik-update.componen
     VlasnikComponent,
     VlasnikListComponent,
     VlasnikDetailsComponent,
-    VlasnikUpdateComponent
+    VlasnikUpdateComponent,
+    CreateSednicaComponent,
+    SednicaCreateComponent,
+    SednicaListComponent,
+    SednicaDetailsComponent
   ],
   imports: [
     BrowserModule,
