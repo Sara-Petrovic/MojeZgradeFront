@@ -13,13 +13,14 @@ import { SednicaSkupstineService } from '../services/sednica-skupstine.service';
 export class SednicaListComponent implements OnInit {
 
   sednice: Observable<SednicaSkupstine[]>;
-  options: { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  ulica: string;
 
   constructor(private sednicaService: SednicaSkupstineService,
     private router: Router) { }
 
   ngOnInit() {
     this.reloadData();
+    this.ulica="";
   }
 
   reloadData() {
@@ -30,6 +31,13 @@ export class SednicaListComponent implements OnInit {
 
   sednicaDetails(id: number) {
     this.router.navigate(['detailssednica', id]);
+  }
+  findSednicaByUlica(){
+    if (this.ulica == "") {
+      this.sednice = this.sednicaService.getAllSedniceSkupstine();
+    } else {
+      this.sednice = this.sednicaService.getSednicaSkupstineByUlicaFromRemote(this.ulica);
+    }
   }
 
 }

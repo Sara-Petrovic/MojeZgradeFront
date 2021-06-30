@@ -1,15 +1,15 @@
 <div class="container">
     <div class="row">
-              <!-- <div id="custom-search-input">
+               <div id="custom-search-input">
                                 <div class="input-group col-md-8" style="text-align: center">
-                                    <input type="text" class="search-query form-control" placeholder="Pronadji vlasnika po prezimenu"  name="prezime" [(ngModel)]="prezime"/>
+                                    <input type="text" class="search-query form-control" placeholder="Pronadji sednicu skupstine po ulici stambene zajednice"  name="ulica" [(ngModel)]="ulica"/>
                                     <span class="input-group-btn">
-                                        <button class="btn btn-danger" type="button" (click)="findVlasnikByPrezime()">
+                                        <button class="btn btn-danger" type="button" (click)="findSednicaByUlica()">
                                             <span class=" glyphicon glyphicon-search">Pronadji</span>
                                         </button>
                                     </span>
                                 </div>
-                            </div>-->
+                            </div>
     </div>
     </div>
   <div class="panel panel-primary" style="text-align: center">
@@ -32,7 +32,7 @@
             <tbody>
               <tr *ngFor="let sednica of sednice | async">
                 <td>{{sednica.sednicaSkupstineId}}</td>
-                <td>{{sednica.datumOdrzavanja}}</td>
+                <td>{{sednica.datumOdrzavanja | date}}</td>
                 <td>{{sednica.stambenaZajednica.ulica}} {{sednica.stambenaZajednica.broj}},{{sednica.stambenaZajednica.mesto.naziv}}</td>
                 <td>{{sednica.dnevniRed}}</td>
                 <td>

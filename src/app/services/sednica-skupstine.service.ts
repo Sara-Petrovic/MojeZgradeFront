@@ -11,4 +11,10 @@ export class SednicaSkupstineService {
   getAllSedniceSkupstine(){
     return this._http.get<any>("http://localhost:8090/sednicaskupstine");
   }
+  getSednicaSkupstineFromRemote(sednicaId:number){
+    return this._http.get<any>("http://localhost:8090/sednicaskupstine/"+ sednicaId);
+  }
+  getSednicaSkupstineByUlicaFromRemote(ulica:string){
+    return this._http.get<any>("http://localhost:8090/findsednicabyulica/"+ ulica);
+  }
 }
