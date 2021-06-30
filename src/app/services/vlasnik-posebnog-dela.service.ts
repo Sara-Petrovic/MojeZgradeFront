@@ -7,6 +7,7 @@ import { VlasnikPosebnogDela } from '../model/vlasnik-posebnog-dela';
   providedIn: 'root'
 })
 export class VlasnikPosebnogDelaService {
+  
   constructor(private _http: HttpClient) { }
 
   saveVlasnikPosebnogDelaFromRemote(vlasnik:VlasnikPosebnogDela){
@@ -25,6 +26,9 @@ export class VlasnikPosebnogDelaService {
   getVlasnikByPrezimeFromRemote(vlasnikPrezime:string){
     return this._http.get<any>("http://localhost:8090/findvlasnikbyprezime/"+ vlasnikPrezime);
 
+  }
+  getAllVlasniciByStambenaZajednicaFromRemote(szId:number) {
+    return this._http.get<any>("http://localhost:8090/findvlasnikbystambenazajednica/"+ szId);
   }
   updateVlasnikPosebnogDelaFromRemote(vlasnikId:number, newVlasnik: VlasnikPosebnogDela){
     return this._http.put<any>("http://localhost:8090/vlasnikposebnogdela/"+vlasnikId, newVlasnik);
