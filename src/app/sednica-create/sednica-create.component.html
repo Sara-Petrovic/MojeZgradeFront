@@ -1,1 +1,39 @@
-<p>sednica-create works!</p>
+<div class="container">
+    <h2>Moje zgrade</h2>
+    <form #vlasnikform="ngForm" (ngSubmit)="saveSednicaSkupstine()">
+        <small class="text-danger">{{msg}}</small>
+
+        <div class="form-group">
+            <label for="stambenaZajednica">Stambena zajednica:</label>
+            <select [(ngModel)]="selectedStambenaZajednica" (change)="selectedSZ()" class="form-control" name="stambenaZajednica" >
+                <option *ngFor="let sz of stambeneZajednice" [value]="sz" [ngValue]="sz" id="{{sz.ulica}}"> {{sz.ulica}} {{sz.broj}}, {{sz.mesto.naziv}} </option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="stambenaZajednica">Vlasnici koji su prisustvovali sednici:</label>
+            <select [(ngModel)]="selectedVlasnici" class="form-control" name="vlasnici" >
+                <option *ngFor="let v of vlasnici" [value]="v" [ngValue]="v" id="{{v.vlasnikId}}"> {{v.ime}} {{v.prezime}} </option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="datumOdrzavanja">Datum odrzavanja:</label>
+            <input type="date" class="form-control" placeholder="Unesite datum odrzavanja" name="datumOdrzavanja" [(ngModel)]="sednica.datumOdrzavanja ">
+        </div>
+
+        <div class="form-group">
+            <label for="brojPrisutnih">Broj prisutnih:</label>
+            <input type="number" class="form-control" placeholder="Unesite broj prisutnih" name="brojPrisutnih"
+                [(ngModel)]="sednica.brojPrisutnih">
+        </div>
+
+        <div class="form-group">
+            <label for="dnevniRed">Dnevni red:</label>
+            <input type="text" class="form-control" placeholder="Unesite dnevni red" name="dnevniRed"
+                [(ngModel)]="sednica.dnevniRed">
+        </div>
+
+        <button type="submit" class="btn btn-info">Save</button>
+    </form>
+</div>
