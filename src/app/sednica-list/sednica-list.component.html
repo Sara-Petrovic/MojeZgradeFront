@@ -1,1 +1,46 @@
-<p>sednica-list works!</p>
+<div class="container">
+    <div class="row">
+              <!-- <div id="custom-search-input">
+                                <div class="input-group col-md-8" style="text-align: center">
+                                    <input type="text" class="search-query form-control" placeholder="Pronadji vlasnika po prezimenu"  name="prezime" [(ngModel)]="prezime"/>
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-danger" type="button" (click)="findVlasnikByPrezime()">
+                                            <span class=" glyphicon glyphicon-search">Pronadji</span>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>-->
+    </div>
+    </div>
+  <div class="panel panel-primary" style="text-align: center">
+    <div class="panel-heading" >
+      <h2>Lista sednica skupstine</h2>
+    </div>
+    <div class="container" >
+      <div class="container">
+        <div class="row col-md-8 col-md-offset-2 custyle">
+          <table class="table table-striped custab" >
+            <thead>
+              <tr>
+                <th>Sednica skupstine ID</th>
+                <th>Datum odrzavanja</th>
+                <th>Stambena zajednica</th>
+                <th>Dnevni red</th>
+                <th>Akcije</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let sednica of sednice | async">
+                <td>{{sednica.sednicaSkupstineId}}</td>
+                <td>{{sednica.datumOdrzavanja}}</td>
+                <td>{{sednica.stambenaZajednica.ulica}} {{sednica.stambenaZajednica.broj}},{{sednica.stambenaZajednica.mesto.naziv}}</td>
+                <td>{{sednica.dnevniRed}}</td>
+                <td>
+                  <button (click)="sednicaDetails(sednica.sednicaSkupstineId)" class="btn btn-info"
+                    style="margin-left: 10px">Details</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
