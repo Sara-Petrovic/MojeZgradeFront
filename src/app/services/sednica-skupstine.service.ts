@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,5 +6,9 @@ import { Injectable } from '@angular/core';
 })
 export class SednicaSkupstineService {
 
-  constructor() { }
+  constructor(private _http: HttpClient) { }
+
+  getAllSedniceSkupstine(){
+    return this._http.get<any>("http://localhost:8090/sednicaskupstine");
+  }
 }
