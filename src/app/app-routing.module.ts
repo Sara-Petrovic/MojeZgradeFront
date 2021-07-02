@@ -14,6 +14,7 @@ const routes: Routes = [
   {path:'stambenazajednica', component:StambenazajednicaComponent},
   {path:'vlasnikposebnogdela', component:VlasnikComponent},
   {path:'vlasnici', component:VlasnikListComponent},
+  { path: 'loginsuccess/stambenazajednica',   redirectTo: '/stambenazajednica', pathMatch: 'full' },
   { path: 'loginsuccess/vlasnici',   redirectTo: '/vlasnici', pathMatch: 'full' },
   { path: 'loginsuccess/vlasnikposebnogdela',   redirectTo: '/vlasnikposebnogdela', pathMatch: 'full' },
   {path:'updatevlasnik/:id', component:VlasnikUpdateComponent},

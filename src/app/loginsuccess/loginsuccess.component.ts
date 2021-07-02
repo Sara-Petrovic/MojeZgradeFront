@@ -15,9 +15,9 @@ export class LoginsuccessComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  openSaveStambenaZajednica(){
-    this._router.navigate(['/stambenazajednica']);
-  }
+  // openSaveStambenaZajednica(){
+  //   this._router.navigate(['/stambenazajednica']);
+  // }
   openSaveVlasnikPosebnogDela(){
     this._router.navigate(['/vlasnikposebnogdela']);
   }

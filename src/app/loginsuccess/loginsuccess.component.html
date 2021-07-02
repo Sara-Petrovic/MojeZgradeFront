@@ -1,6 +1,6 @@
-<form #menuform="ngForm" (ngSubmit)="openSaveStambenaZajednica()">
+<!-- <form #menuform="ngForm" (ngSubmit)="openSaveStambenaZajednica()">
     <button type="submit" class="btn btn-info">Kreiraj SZ</button>
-</form>
+</form> -->
 <form #menuform2="ngForm" (ngSubmit)="openSaveVlasnikPosebnogDela()">
 <button type="submit" class="btn btn-info">Kreiraj vlasnika posebnog dela</button>
 </form>
@@ -10,8 +10,18 @@
       <li class="nav-item">
           <a routerLink="vlasnici" class="nav-link" routerLinkActive="active">Lista svih vlasnika</a>
       </li>
+
       <li class="nav-item">
           <a routerLink="vlasnikposebnogdela" class="nav-link" routerLinkActive="active">Kreiraj novog vlasnika</a>
+      </li>
+
+      <li class="nav-item">
+        <div class="dropdown">
+          <button class="dropbtn">Stambena zajednica</button>
+          <div class="dropdown-content">
+            <a routerLink="stambenazajednica" routerLinkActive="active">Kreiraj stambenu zajednicu</a>
+          </div>
+        </div>
       </li>
     </ul>
   </nav>
