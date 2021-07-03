@@ -13,6 +13,8 @@ import { VlasnikComponent } from './vlasnik/vlasnik.component';
 import { VlasnikListComponent } from './vlasnik-list/vlasnik-list.component';
 import { VlasnikDetailsComponent } from './vlasnik-details/vlasnik-details.component';
 import { VlasnikUpdateComponent } from './vlasnik-update/vlasnik-update.component';
+import { StambenazajednicaListComponent } from './stambenazajednica-list/stambenazajednica-list.component';
+import { StambenazajednicaDetailsComponent } from './stambenazajednica-details/stambenazajednica-details.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { VlasnikUpdateComponent } from './vlasnik-update/vlasnik-update.componen
     VlasnikComponent,
     VlasnikListComponent,
     VlasnikDetailsComponent,
-    VlasnikUpdateComponent
+    VlasnikUpdateComponent,
+    StambenazajednicaListComponent,
+    StambenazajednicaDetailsComponent
   ],
   imports: [
     BrowserModule,
