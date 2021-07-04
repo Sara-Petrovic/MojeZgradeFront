@@ -1,5 +1,6 @@
 <div class="container">
-    <select class="form-select" aria-label="Izaberite kriterijum po kom pretrazujete:" (change)="selectSearchCriteria()"
+    <label for="select-search-criteria">Izaberite kriterijum po kom pretrazujete:</label>
+    <select class="form-select" name="select-search-criteria" (change)="selectSearchCriteria()"
         [(ngModel)]="searchCriteria">
         <option value="pib">PIB</option>
         <option value="maticniBroj">Maticni broj</option>

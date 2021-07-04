@@ -1,1 +1,33 @@
-<p>stambenazajednica-details works!</p>
+<h2>Detaljni podaci o stambenoj zajednici</h2> 
+
+<hr/>
+<div *ngIf="stambenaZajednica">
+    <div>
+        <label><b>Stambena zajednica ID: </b></label> {{stambenaZajednica.stambenaZajednicaId}}
+      </div>
+  <div>
+    <label><b>Ulica: </b></label> {{stambenaZajednica.ulica}}
+  </div>
+  <div>
+    <label><b>Broj: </b></label> {{stambenaZajednica.broj}}
+  </div>
+  <div>
+    <label><b>Mesto: </b></label> {{stambenaZajednica.mesto.naziv}}
+  </div>  
+  <div>
+    <label><b>PIB: </b></label> {{stambenaZajednica.pib}}
+  </div>  
+  <div>
+    <label><b>Maticni broj: </b></label> {{stambenaZajednica.maticniBroj}}
+  </div>  
+  <div>
+    <label><b>Banka: </b></label> {{stambenaZajednica.banka}}
+  </div>  
+  <div>
+    <label><b>Tekuci račun: </b></label> {{stambenaZajednica.tekuciRacun}}
+  </div> 
+</div>
+
+<br>
+<br>
+<button (click)="list()" class="btn btn-primary">Nazad na listu stambenih zajednica</button><br>
