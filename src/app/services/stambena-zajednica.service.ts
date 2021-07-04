@@ -33,7 +33,7 @@ export class StambenaZajednicaService {
   findStambenaZajednicaByUlicaIBrojFromRemote(ulica:string, broj:string){
     return this._http.get<any>("http://localhost:8090/stambenazajednica/searchbyulicabroj?ulica=" + ulica + "&broj=" + broj);
   }
-  updateVlasnikPosebnogDelaFromRemote(id:number, updatedStambenaZajednica: StambenaZajednica){
+  updateStambenaZajednicaFromRemote(id:number, updatedStambenaZajednica: StambenaZajednica){
     return this._http.put<any>("http://localhost:8090/stambenazajednica/"+ id, updatedStambenaZajednica);
   }
   deleteStambenaZajednicaFromRemote(id: number){

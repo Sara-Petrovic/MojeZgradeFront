@@ -13,8 +13,8 @@ import { StambenaZajednicaService } from '../services/stambena-zajednica.service
 })
 export class StambenazajednicaComponent implements OnInit {
 
-  mesto: Mesto[];
-  selectedMesto: Mesto;
+  mesto!: Mesto[];
+  selectedMesto!: Mesto;
 
   sZajednica = new StambenaZajednica();
   msg = '';

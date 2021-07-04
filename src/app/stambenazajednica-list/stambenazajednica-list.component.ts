@@ -22,7 +22,7 @@ export class StambenazajednicaListComponent implements OnInit {
 
   constructor(private szService: StambenaZajednicaService,
     private router: Router) {
-    this.show = new Array(3);
+    this.show = new Array<boolean>(3);
     this.show[0] = true;
     this.show[1] = false;
     this.show[2] = false;
@@ -81,7 +81,7 @@ export class StambenazajednicaListComponent implements OnInit {
   }
 
   findStambenaZajednicaByUlicaIBrojFromRemote() {
-    if (this.ulica == "" || this.broj == "") {
+    if (this.ulica == "") {
       this.zajednice = this.szService.getAllStambenaZajednicaFromRemote();
     } else {
       this.zajednice = this.szService.findStambenaZajednicaByUlicaIBrojFromRemote(this.ulica, this.broj);
@@ -106,6 +106,10 @@ export class StambenazajednicaListComponent implements OnInit {
       this.show[1] = false;
       this.show[2] = false;
     }
+  }
+
+  home(){
+    this.router.navigate(['loginsuccess']);
   }
 
 }
