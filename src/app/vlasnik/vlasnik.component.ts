@@ -13,15 +13,15 @@ import { StambenaZajednica } from '../model/stambena-zajednica';
   styleUrls: ['./vlasnik.component.css']
 })
 export class VlasnikComponent implements OnInit {
-  stambeneZajednice: StambenaZajednica[];
-  selectedStambenaZajednica: StambenaZajednica;
+  stambeneZajednice!: StambenaZajednica[];
+  selectedStambenaZajednica!: StambenaZajednica;
 
 
   vlasnik = new VlasnikPosebnogDela();
   msg = '';
 
   jediniceMere: Array<string> = Object.keys(JedinicaMere).filter(key => isNaN(+key));
-  selectedJedinicaMere: JedinicaMere;
+  selectedJedinicaMere!: JedinicaMere;
 
   constructor(private _service: VlasnikPosebnogDelaService, private _serviceSZ: StambenaZajednicaService,
     private _router: Router) { }
