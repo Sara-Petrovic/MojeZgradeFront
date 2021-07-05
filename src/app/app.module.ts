@@ -15,6 +15,7 @@ import { VlasnikDetailsComponent } from './vlasnik-details/vlasnik-details.compo
 import { VlasnikUpdateComponent } from './vlasnik-update/vlasnik-update.component';
 import { StambenazajednicaListComponent } from './stambenazajednica-list/stambenazajednica-list.component';
 import { StambenazajednicaDetailsComponent } from './stambenazajednica-details/stambenazajednica-details.component';
+import { RacunListComponent } from './racun-list/racun-list.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { StambenazajednicaDetailsComponent } from './stambenazajednica-details/s
     VlasnikDetailsComponent,
     VlasnikUpdateComponent,
     StambenazajednicaListComponent,
-    StambenazajednicaDetailsComponent
+    StambenazajednicaDetailsComponent,
+    RacunListComponent
   ],
   imports: [
     BrowserModule,
