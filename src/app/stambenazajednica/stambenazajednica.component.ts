@@ -22,7 +22,8 @@ export class StambenazajednicaComponent implements OnInit {
   user = new User();
 
   constructor(private _service: StambenaZajednicaService, private _router: Router,
-    private _mestoService: MestoService) { }
+    private _mestoService: MestoService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.fillComboBoxMesta();
@@ -62,4 +63,7 @@ export class StambenazajednicaComponent implements OnInit {
     );
   }
 
+  home(){
+    this.router.navigate(['loginsuccess']);
+  }
 }

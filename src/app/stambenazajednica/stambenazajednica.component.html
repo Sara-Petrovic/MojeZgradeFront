@@ -1,5 +1,5 @@
 <div class="container">
-    <h2>Moje zgrade</h2>
+    <h2 style="margin-top: 0.5em;">Moje zgrade</h2>
     <form #stambenaZajednicaform="ngForm" (ngSubmit)="saveStambenaZajednica()">
         <small class="text-danger">{{msg}}</small>
 
@@ -48,4 +48,5 @@
 
         <button type="submit" class="btn btn-info" style="margin-top: 2em;">Save</button>
     </form>
+    <button (click)="home()" class="btn btn-primary col-md-3" style="margin-top: 1.5em;" >Nazad na Home Page</button>
 </div>
