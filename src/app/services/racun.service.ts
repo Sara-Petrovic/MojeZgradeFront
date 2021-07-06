@@ -26,11 +26,11 @@ export class RacunService {
   findRacunByStatusFromRemote(status:string){
     return this._http.get<any>("http://localhost:8090/racun/searchbystatus?status=" + status);
   }
-/*
+  
   getRacunByIdFromRemote(id: number):Observable<any>{
     return this._http.get<Racun>("http://localhost:8090/racun/" + id);
   }
- */  
+ 
   findRacunByVlasnikFromRemote(vlasnik:VlasnikPosebnogDela){
     return this._http.get<any>("http://localhost:8090/racun/searchbyvlasnik?vlasnik=" + vlasnik.vlasnikId);
   }

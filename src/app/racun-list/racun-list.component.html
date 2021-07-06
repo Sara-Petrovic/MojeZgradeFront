@@ -60,12 +60,9 @@
                             <td>{{racun.datumIzdavanja}}</td>
                             <td>{{racun.status}}</td>
                             <td>{{racun.vlasnikPosebnogDela.ime}} {{racun.vlasnikPosebnogDela.prezime}}</td>
-
-
-                            <td><button (click)="deleteRacun(racun.racunId)"
-                                    class="btn btn-danger col-md-4" style="text-justify: center;">Delete</button>
-                                   <button (click)="racunDetails(racun.racunId)"
-                                    class="btn btn-info col-md-4" style="margin-left: 0.5em; text-justify: center;">Details</button>
+                            <td>
+                                <button (click)="racunDetails(racun.racunId)" class="btn btn-info col-md-6"
+                                    style="margin-left: 0.5em; text-justify: center;">Details</button>
                             </td>
                         </tr>
                     </tbody>

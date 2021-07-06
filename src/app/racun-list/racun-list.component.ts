@@ -12,18 +12,18 @@ import { VlasnikPosebnogDelaService } from '../services/vlasnik-posebnog-dela.se
   styleUrls: ['./racun-list.component.css']
 })
 export class RacunListComponent implements OnInit {
-  vlasnici!:VlasnikPosebnogDela[];
-  selectedVlasnik!:VlasnikPosebnogDela;
+  vlasnici!: VlasnikPosebnogDela[];
+  selectedVlasnik!: VlasnikPosebnogDela;
 
-  racuni!:Observable<Racun[]>;
+  racuni!: Observable<Racun[]>;
   searchCriteria!: string;
   show: Array<boolean>;
-  status!:string;
-  vlasnik!:VlasnikPosebnogDela;
+  status!: string;
+  vlasnik!: VlasnikPosebnogDela;
 
-  constructor(private racunService:RacunService, 
-    private router:Router,
-    private vlasnikService:VlasnikPosebnogDelaService) { 
+  constructor(private racunService: RacunService,
+    private router: Router,
+    private vlasnikService: VlasnikPosebnogDelaService) {
     this.show = new Array<boolean>(3);
     this.show[0] = true;
     this.show[1] = false;
@@ -40,18 +40,8 @@ export class RacunListComponent implements OnInit {
     this.vlasnikService.getAllVlasnikPosebnogDelaFromRemote()
       .subscribe(vlasnici => { this.vlasnici = vlasnici; console.log(vlasnici) });
   }
-
-  deleteRacun(id: number) {
-    this.racunService.deleteRacunFromRemote(id)
-      .subscribe(
-        data => {
-          console.log(data);
-          this.reloadData();
-        },
-        error => console.log(error));
-  }
-
-  home(){
+  
+  home() {
     this.router.navigate(['loginsuccess']);
   }
 
@@ -80,7 +70,7 @@ export class RacunListComponent implements OnInit {
   }
 
   findRacunByVlasnikFromRemote() {
-      this.racuni = this.racunService.findRacunByVlasnikFromRemote(this.selectedVlasnik);
+    this.racuni = this.racunService.findRacunByVlasnikFromRemote(this.selectedVlasnik);
   }
 
   racunDetails(id: number) {

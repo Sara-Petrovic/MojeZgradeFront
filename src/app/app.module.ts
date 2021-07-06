@@ -17,6 +17,7 @@ import { StambenazajednicaListComponent } from './stambenazajednica-list/stamben
 import { StambenazajednicaDetailsComponent } from './stambenazajednica-details/stambenazajednica-details.component';
 import { RacunListComponent } from './racun-list/racun-list.component';
 import { RacunComponent } from './racun/racun.component';
+import { RacunDetailsComponent } from './racun-details/racun-details.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { RacunComponent } from './racun/racun.component';
     StambenazajednicaListComponent,
     StambenazajednicaDetailsComponent,
     RacunListComponent,
-    RacunComponent
+    RacunComponent,
+    RacunDetailsComponent
   ],
   imports: [
     BrowserModule,

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { LoginsuccessComponent } from './loginsuccess/loginsuccess.component';
+import { RacunDetailsComponent } from './racun-details/racun-details.component';
 import { RacunListComponent } from './racun-list/racun-list.component';
 import { RacunComponent } from './racun/racun.component';
 import { StambenazajednicaDetailsComponent } from './stambenazajednica-details/stambenazajednica-details.component';
@@ -29,7 +30,8 @@ const routes: Routes = [
   {path: 'racuni', component:RacunListComponent},
   {path: 'loginsuccess/racuni',   redirectTo: '/racuni', pathMatch: 'full' },
   {path: 'racun', component:RacunComponent},
-  {path: 'loginsuccess/racun',   redirectTo: '/racun', pathMatch: 'full' }
+  {path: 'loginsuccess/racun',   redirectTo: '/racun', pathMatch: 'full' },
+  {path: 'detailsracun/:id', component:RacunDetailsComponent}
   
 ];
 
