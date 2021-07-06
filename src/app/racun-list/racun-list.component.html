@@ -4,51 +4,41 @@
         [(ngModel)]="searchCriteria">
         <option value="status">Status</option>
         <option value="vlasnik">Vlasnik</option>
-        <option value="datum">Datum izdavanja</option>
     </select>
 </div>
 <div class="container" style="margin-top: 0.5em;">
     <div class="row">
         <div id="custom-search-input">
-            <!-- <div class="input-group col-md-6" id="search-by-pib" style="text-align: center" *ngIf="show[0]">
-                <input type="text" class="search-query form-control" placeholder="Pronadji stambenu zajednicu po PIB"
-                    name="pib" [(ngModel)]="pib" style="margin-right: 1em;" />
+            <div class="input-group col-md-6" id="search-by-status" style="text-align: center" *ngIf="show[0]">
+                <label for="status">Status:</label>
+                <select [(ngModel)]="status" class="form-control" name="status">
+                    <option value="NEPLACEN"> Neplaćen</option>
+                    <option value="PLACEN"> Plaćen</option>
+                </select>
                 <span class="input-group-btn">
-                    <button class="btn btn-danger" type="button" (click)="findStambenaZajednicaByPibFromRemote()">
+                    <button class="btn btn-danger" type="button" (click)="findRacunByStatusFromRemote()">
                         <span class=" glyphicon glyphicon-search">Pronadji</span>
                     </button>
                 </span>
-            </div> -->
-
-            <!-- <div class="input-group col-md-8" id="search-by-maticni-broj" style="text-align: center" *ngIf="show[1]">
-                <input type="text" class="search-query form-control"
-                    placeholder="Pronadji stambenu zajednicu po maticnom broju" name="maticniBroj" [(ngModel)]="maticniBroj" style="margin-right: 1em;"/>
+            </div>
+            <div class="input-group col-md-8" id="search-by-vlasnik" style="text-align: center" *ngIf="show[1]">
+                <label for="vlasnik">Vlasnik:</label>
+                <select [(ngModel)]="selectedVlasnik" class="form-control" name="vlasnik">
+                    <option *ngFor="let v of vlasnici" [value]="v" [ngValue]="v" id="{{v.vlasnikId}}_{{v.prezime}}">
+                        {{v.ime}} {{v.prezime}}</option>
+                </select>
                 <span class="input-group-btn">
-                    <button class="btn btn-danger" type="button" (click)="findStambenaZajednicaByMaticniBrojFromRemote()">
+                    <button class="btn btn-danger" type="button" (click)="findRacunByVlasnikFromRemote()">
                         <span class=" glyphicon glyphicon-search">Pronadji</span>
                     </button>
                 </span>
-            </div> -->
-
-            <!-- <div class="input-group" id="search-by-ulica-broj" style="text-align: center" *ngIf="show[2]">
-                <input type="text" class="search-query form-control col-md-4"
-                    placeholder="Unesite ulicu" name="ulica" [(ngModel)]="ulica" style="margin-right: 1em;"/>
-                    <input type="text" class="search-query form-control col-md-4"
-                    placeholder="Unesite broj" name="broj" [(ngModel)]="broj" style="margin-right: 1em;"/>
-                <span class="input-group-btn">
-                    <button class="btn btn-danger" type="button" (click)="findStambenaZajednicaByUlicaIBrojFromRemote()">
-                        <span class=" glyphicon glyphicon-search">Pronadji</span>
-                    </button>
-                </span>
-            </div> -->
+            </div>
         </div>
     </div>
 </div>
 
-
-
 <div class="panel panel-primary" style="text-align: left">
-    <div class="panel-heading" style="margin-left: 7.5em; margin-top: 2em;"> 
+    <div class="panel-heading" style="margin-left: 7.5em; margin-top: 2em;">
         <h2>Lista svih računa</h2>
     </div>
     <div class="container">
@@ -70,18 +60,18 @@
                             <td>{{racun.datumIzdavanja}}</td>
                             <td>{{racun.status}}</td>
                             <td>{{racun.vlasnikPosebnogDela.ime}} {{racun.vlasnikPosebnogDela.prezime}}</td>
-                            
 
-                             <td><button (click)="deleteStambenaZajednica(racun.racunId)"
-                                    class="btn btn-danger col-md-7">Delete</button>
-                            <!--    <button (click)="stambenaZajednicaDetails(racun.racunId)"
-                                    class="btn btn-info col-md-7" style="margin-left: 0.5em">Details</button>
-                            </td> -->
+
+                            <td><button (click)="deleteRacun(racun.racunId)"
+                                    class="btn btn-danger col-md-4" style="text-justify: center;">Delete</button>
+                                   <button (click)="racunDetails(racun.racunId)"
+                                    class="btn btn-info col-md-4" style="margin-left: 0.5em; text-justify: center;">Details</button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-    <button (click)="home()" class="btn btn-primary col-md-3" style="margin-left: 7.5em;" >Nazad na Home Page</button>
+    <button (click)="home()" class="btn btn-primary col-md-3" style="margin-left: 7.5em;">Nazad na Home Page</button>
 </div>

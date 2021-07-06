@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Racun } from '../model/racun';
 import { VlasnikPosebnogDela } from '../model/vlasnik-posebnog-dela';
 import { RacunService } from '../services/racun.service';
+import { VlasnikPosebnogDelaService } from '../services/vlasnik-posebnog-dela.service';
 
 @Component({
   selector: 'app-racun-list',
@@ -11,32 +12,36 @@ import { RacunService } from '../services/racun.service';
   styleUrls: ['./racun-list.component.css']
 })
 export class RacunListComponent implements OnInit {
+  vlasnici!:VlasnikPosebnogDela[];
+  selectedVlasnik!:VlasnikPosebnogDela;
 
   racuni!:Observable<Racun[]>;
   searchCriteria!: string;
   show: Array<boolean>;
-  datumOd!:Date;
-  datumDo!:Date;
   status!:string;
   vlasnik!:VlasnikPosebnogDela;
 
-  constructor(private racunService:RacunService, private router:Router) { 
+  constructor(private racunService:RacunService, 
+    private router:Router,
+    private vlasnikService:VlasnikPosebnogDelaService) { 
     this.show = new Array<boolean>(3);
     this.show[0] = true;
     this.show[1] = false;
-    this.show[2] = false;
   }
 
   ngOnInit(): void {
     this.reloadData();
-    this.datumOd = new Date;
-    this.datumDo = new Date;
     this.vlasnik = new VlasnikPosebnogDela;
     this.status = "";
     this.selectSearchCriteria();
   }
 
-  deleteStambenaZajednica(id: number) {
+  fillComboBoxVlasnici(): void {
+    this.vlasnikService.getAllVlasnikPosebnogDelaFromRemote()
+      .subscribe(vlasnici => { this.vlasnici = vlasnici; console.log(vlasnici) });
+  }
+
+  deleteRacun(id: number) {
     this.racunService.deleteRacunFromRemote(id)
       .subscribe(
         data => {
@@ -54,64 +59,31 @@ export class RacunListComponent implements OnInit {
     this.racuni = this.racunService.getAllRacunFromRemote();
   }
 
+  findRacunByStatusFromRemote() {
+    if (this.status == "") {
+      this.racuni = this.racunService.getAllRacunFromRemote();
+    } else {
+      this.racuni = this.racunService.findRacunByStatusFromRemote(this.status);
+    }
+  }
+
   selectSearchCriteria() {
     if (this.searchCriteria == "vlasnik") {
+      this.fillComboBoxVlasnici();
       this.show[0] = false;
       this.show[1] = true;
-      this.show[2] = false;
-    } else if (this.searchCriteria == "datum") {
-      this.show[0] = false;
-      this.show[1] = false;
-      this.show[2] = true;
     } else {
       this.status = "";
       this.show[0] = true;
       this.show[1] = false;
-      this.show[2] = false;
     }
   }
 
-  /*
-    ngOnInit() {
-   
-    
+  findRacunByVlasnikFromRemote() {
+      this.racuni = this.racunService.findRacunByVlasnikFromRemote(this.selectedVlasnik);
   }
 
-  stambenaZajednicaDetails(id: number) {
-    this.router.navigate(['detailsstambenazajednica', id]);
+  racunDetails(id: number) {
+    this.router.navigate(['detailsracun', id]);
   }
-  stambenaZajednicaUpdate(id: number) {
-    this.router.navigate(['detailsstambenazajednica', id]);
-  }
-
-  findStambenaZajednicaByPibFromRemote() {
-    if (this.pib == "") {
-      this.zajednice = this.szService.getAllStambenaZajednicaFromRemote();
-    } else if (this.pib.length != 9) {
-      alert("PIB mora da ima tačno 9 cifara.");
-      this.zajednice = this.szService.getAllStambenaZajednicaFromRemote();
-    } else {
-      this.zajednice = this.szService.findStambenaZajednicaByPibFromRemote(this.pib);
-    }
-  }
-
-  findStambenaZajednicaByMaticniBrojFromRemote() {
-    if (this.maticniBroj == "") {
-      this.zajednice = this.szService.getAllStambenaZajednicaFromRemote();
-    } else if (this.maticniBroj.length != 8) {
-      alert("Maticni broj mora da ima tačno 8 cifara.");
-      this.zajednice = this.szService.getAllStambenaZajednicaFromRemote();
-    } else {
-      this.zajednice = this.szService.findStambenaZajednicaByMaticniBrojFromRemote(this.maticniBroj);
-    }
-  }
-
-  findStambenaZajednicaByUlicaIBrojFromRemote() {
-    if (this.ulica == "") {
-      this.zajednice = this.szService.getAllStambenaZajednicaFromRemote();
-    } else {
-      this.zajednice = this.szService.findStambenaZajednicaByUlicaIBrojFromRemote(this.ulica, this.broj);
-    }
-  } 
-  */
 }

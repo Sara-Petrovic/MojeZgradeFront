@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Racun } from '../model/racun';
+import { VlasnikPosebnogDela } from '../model/vlasnik-posebnog-dela';
+import { VlasnikPosebnogDelaService } from './vlasnik-posebnog-dela.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,27 +23,23 @@ export class RacunService {
     return this._http.post<any>("http://localhost:8090/racun", racun);
   }
 
-  /*
-  getStambenaZajednicaByIdFromRemote(id: number):Observable<any>{
-    return this._http.get<StambenaZajednica>("http://localhost:8090/racun/" + id);
+  findRacunByStatusFromRemote(status:string){
+    return this._http.get<any>("http://localhost:8090/racun/searchbystatus?status=" + status);
+  }
+/*
+  getRacunByIdFromRemote(id: number):Observable<any>{
+    return this._http.get<Racun>("http://localhost:8090/racun/" + id);
+  }
+ */  
+  findRacunByVlasnikFromRemote(vlasnik:VlasnikPosebnogDela){
+    return this._http.get<any>("http://localhost:8090/racun/searchbyvlasnik?vlasnik=" + vlasnik.vlasnikId);
   }
 
-  findStambenaZajednicaByPibFromRemote(pib:string){
-    return this._http.get<any>("http://localhost:8090/stambenazajednica/searchbypib?pib=" + pib);
+  findRacunByDatumFromRemote(datumOd:Date, datumDo:Date){
+    return this._http.get<any>("http://localhost:8090/racun/searchbydatum?datumOd=" + datumOd + "&datumDo=" + datumDo);
   }
 
-  findStambenaZajednicaByMaticniBrojFromRemote(maticniBroj:string){
-    return this._http.get<any>("http://localhost:8090/stambenazajednica/searchbymaticnibroj?maticni_broj=" + maticniBroj);
+  updateRacunFromRemote(id:number, updatedRacun: Racun){
+    return this._http.put<any>("http://localhost:8090/racun/"+ id, updatedRacun);
   }
-
-  findStambenaZajednicaByUlicaIBrojFromRemote(ulica:string, broj:string){
-    return this._http.get<any>("http://localhost:8090/stambenazajednica/searchbyulicabroj?ulica=" + ulica + "&broj=" + broj);
-  }
-  updateStambenaZajednicaFromRemote(id:number, updatedStambenaZajednica: StambenaZajednica){
-    return this._http.put<any>("http://localhost:8090/stambenazajednica/"+ id, updatedStambenaZajednica);
-  }
- 
-
-  
-  */
 }
