@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { LoginsuccessComponent } from './loginsuccess/loginsuccess.component';
 import { RacunListComponent } from './racun-list/racun-list.component';
+import { RacunComponent } from './racun/racun.component';
 import { StambenazajednicaDetailsComponent } from './stambenazajednica-details/stambenazajednica-details.component';
 import { StambenazajednicaListComponent } from './stambenazajednica-list/stambenazajednica-list.component';
 import { StambenazajednicaComponent } from './stambenazajednica/stambenazajednica.component';
@@ -27,6 +28,8 @@ const routes: Routes = [
   {path:'detailsstambenazajednica/:id', component:StambenazajednicaDetailsComponent},
   {path: 'racuni', component:RacunListComponent},
   {path: 'loginsuccess/racuni',   redirectTo: '/racuni', pathMatch: 'full' },
+  {path: 'racun', component:RacunComponent},
+  {path: 'loginsuccess/racun',   redirectTo: '/racun', pathMatch: 'full' }
   
 ];
 

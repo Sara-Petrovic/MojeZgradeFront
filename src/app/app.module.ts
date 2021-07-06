@@ -16,6 +16,7 @@ import { VlasnikUpdateComponent } from './vlasnik-update/vlasnik-update.componen
 import { StambenazajednicaListComponent } from './stambenazajednica-list/stambenazajednica-list.component';
 import { StambenazajednicaDetailsComponent } from './stambenazajednica-details/stambenazajednica-details.component';
 import { RacunListComponent } from './racun-list/racun-list.component';
+import { RacunComponent } from './racun/racun.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { RacunListComponent } from './racun-list/racun-list.component';
     VlasnikUpdateComponent,
     StambenazajednicaListComponent,
     StambenazajednicaDetailsComponent,
-    RacunListComponent
+    RacunListComponent,
+    RacunComponent
   ],
   imports: [
     BrowserModule,
