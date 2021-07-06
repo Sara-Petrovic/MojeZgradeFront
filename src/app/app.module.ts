@@ -19,6 +19,8 @@ import { SednicaDetailsComponent } from './sednica-details/sednica-details.compo
 import { StambenazajednicaListComponent } from './stambenazajednica-list/stambenazajednica-list.component';
 import { StambenazajednicaDetailsComponent } from './stambenazajednica-details/stambenazajednica-details.component';
 import { RacunListComponent } from './racun-list/racun-list.component';
+import { RacunComponent } from './racun/racun.component';
+import { RacunDetailsComponent } from './racun-details/racun-details.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { RacunListComponent } from './racun-list/racun-list.component';
     SednicaDetailsComponent,
     StambenazajednicaListComponent,
     StambenazajednicaDetailsComponent,
-    RacunListComponent
+    RacunListComponent,
+    RacunComponent,
+    RacunDetailsComponent
   ],
   imports: [
     BrowserModule,
