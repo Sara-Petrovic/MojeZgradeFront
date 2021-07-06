@@ -79,6 +79,10 @@ export class RacunComponent implements OnInit {
   }
 
   saveRacun() {
+    let user = localStorage.getItem("loggedUser");
+    if(user == null){ user = "";}
+    console.log(JSON.parse(user));
+    this.racun.upravnik = JSON.parse(user);
     this.racun.racunId = 1;
     this.racun.datumIzdavanja.setFullYear(this.year, this.month - 1, this.day);
     this.racun.stavke = this.stavke;

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Racun } from '../model/racun';
+import { User } from '../model/user';
 import { VlasnikPosebnogDela } from '../model/vlasnik-posebnog-dela';
 import { RacunService } from '../services/racun.service';
 import { VlasnikPosebnogDelaService } from '../services/vlasnik-posebnog-dela.service';
@@ -21,12 +22,20 @@ export class RacunListComponent implements OnInit {
   status!: string;
   vlasnik!: VlasnikPosebnogDela;
 
+  user: User;
+
   constructor(private racunService: RacunService,
     private router: Router,
     private vlasnikService: VlasnikPosebnogDelaService) {
     this.show = new Array<boolean>(3);
     this.show[0] = true;
     this.show[1] = false;
+
+    let user = localStorage.getItem("loggedUser");
+    if (user == null) {
+      user = "";
+    }
+    this.user = JSON.parse(user);
   }
 
   ngOnInit(): void {
@@ -46,14 +55,15 @@ export class RacunListComponent implements OnInit {
   }
 
   reloadData() {
-    this.racuni = this.racunService.getAllRacunFromRemote();
+    this.racuni = this.racunService.getAllRacunFromRemote(this.user);
   }
 
   findRacunByStatusFromRemote() {
     if (this.status == "") {
-      this.racuni = this.racunService.getAllRacunFromRemote();
+      // let user = JSON.parse( localStorage.getItem("loggedUser"));
+      this.racuni = this.racunService.getAllRacunFromRemote(this.user);
     } else {
-      this.racuni = this.racunService.findRacunByStatusFromRemote(this.status);
+      this.racuni = this.racunService.findRacunByStatusFromRemote(this.user, this.status);
     }
   }
 
@@ -70,7 +80,7 @@ export class RacunListComponent implements OnInit {
   }
 
   findRacunByVlasnikFromRemote() {
-    this.racuni = this.racunService.findRacunByVlasnikFromRemote(this.selectedVlasnik);
+    this.racuni = this.racunService.findRacunByVlasnikFromRemote(this.user, this.selectedVlasnik);
   }
 
   racunDetails(id: number) {

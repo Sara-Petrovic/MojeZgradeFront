@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { StambenaZajednica } from '../model/stambena-zajednica';
+import { User } from '../model/user';
 import { StambenaZajednicaService } from '../services/stambena-zajednica.service';
 
 
@@ -19,6 +20,7 @@ export class StambenazajednicaListComponent implements OnInit {
   ulica!: string;
   broj!: string;
   show: Array<boolean>;
+  user: User;
 
   constructor(private szService: StambenaZajednicaService,
     private router: Router) {
@@ -26,6 +28,12 @@ export class StambenazajednicaListComponent implements OnInit {
     this.show[0] = true;
     this.show[1] = false;
     this.show[2] = false;
+    let user = localStorage.getItem("loggedUser");
+    if (user == null) {
+      user = "";
+    }
+    this.user = JSON.parse(user);
+
   }
 
   ngOnInit() {
@@ -38,7 +46,7 @@ export class StambenazajednicaListComponent implements OnInit {
   }
 
   reloadData() {
-    this.zajednice = this.szService.getAllStambenaZajednicaFromRemote();
+    this.zajednice = this.szService.getAllStambenaZajednicaFromRemoteForUser(this.user);
   }
 
   deleteStambenaZajednica(id: number) {
@@ -60,31 +68,31 @@ export class StambenazajednicaListComponent implements OnInit {
 
   findStambenaZajednicaByPibFromRemote() {
     if (this.pib == "") {
-      this.zajednice = this.szService.getAllStambenaZajednicaFromRemote();
+      this.zajednice = this.szService.getAllStambenaZajednicaFromRemoteForUser(this.user);
     } else if (this.pib.length != 9) {
       alert("PIB mora da ima tačno 9 cifara.");
-      this.zajednice = this.szService.getAllStambenaZajednicaFromRemote();
+      this.zajednice = this.szService.getAllStambenaZajednicaFromRemoteForUser(this.user);
     } else {
-      this.zajednice = this.szService.findStambenaZajednicaByPibFromRemote(this.pib);
+      this.zajednice = this.szService.findStambenaZajednicaByPibFromRemote(this.user,this.pib);
     }
   }
 
   findStambenaZajednicaByMaticniBrojFromRemote() {
     if (this.maticniBroj == "") {
-      this.zajednice = this.szService.getAllStambenaZajednicaFromRemote();
+      this.zajednice = this.szService.getAllStambenaZajednicaFromRemoteForUser(this.user);
     } else if (this.maticniBroj.length != 8) {
       alert("Maticni broj mora da ima tačno 8 cifara.");
-      this.zajednice = this.szService.getAllStambenaZajednicaFromRemote();
+      this.zajednice = this.szService.getAllStambenaZajednicaFromRemoteForUser(this.user);
     } else {
-      this.zajednice = this.szService.findStambenaZajednicaByMaticniBrojFromRemote(this.maticniBroj);
+      this.zajednice = this.szService.findStambenaZajednicaByMaticniBrojFromRemote(this.user, this.maticniBroj);
     }
   }
 
   findStambenaZajednicaByUlicaIBrojFromRemote() {
     if (this.ulica == "") {
-      this.zajednice = this.szService.getAllStambenaZajednicaFromRemote();
+      this.zajednice = this.szService.getAllStambenaZajednicaFromRemoteForUser(this.user);
     } else {
-      this.zajednice = this.szService.findStambenaZajednicaByUlicaIBrojFromRemote(this.ulica, this.broj);
+      this.zajednice = this.szService.findStambenaZajednicaByUlicaIBrojFromRemote(this.user, this.ulica, this.broj);
     }
   }
 
@@ -108,7 +116,7 @@ export class StambenazajednicaListComponent implements OnInit {
     }
   }
 
-  home(){
+  home() {
     this.router.navigate(['loginsuccess']);
   }
 
