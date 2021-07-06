@@ -7,3 +7,15 @@ h2{
     margin: 3em;
     width: 70%;
 }
+
+#vlasnici{
+    margin-left: 0.5em;
+    padding-left: 1em;
+}
+
+
+#lista-vlasnika{
+    padding-left: 1em;
+    padding-right: 1em;
+    border: 1pt black solid;
+}

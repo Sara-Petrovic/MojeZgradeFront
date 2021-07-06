@@ -32,15 +32,18 @@
             </select>
         </div>
 
-        <button type="submit" class="btn btn-info" style="margin-top: 2em;">Save</button>
+        <button type="submit" class="btn btn-info col-md-3" style="margin-top: 2em;">Save</button>
     </form>
 
-    <div class="form-group" style="margin-top: 1.5em;">
+    <div class="input-group" style="margin-top: 1.5em;">
         <label for="status" style="margin-right: 0.5em;">Usluga:</label>
-        <select class="form-control col-md-8" name="selectedUsluga" [(ngModel)]="selectedUsluga">
+        <select class="form-control col-md-4" name="selectedUsluga" [(ngModel)]="selectedUsluga">
             <option *ngFor="let usluga of sveUsluge" [value]="usluga" [ngValue]="usluga" id="usluga{{usluga.uslugaId}}">
                 {{usluga.naziv}}</option>
         </select>
+        <label for="kolicina" style="margin-left: 2em; margin-right: 0.5em;">Količina: </label>
+        <input name="kolicina" type="text" class="form-control col-md-2" style="margin-right: 2em;"
+            [(ngModel)]="kolicina">
         <button (click)="addStavka()" class="btn btn-primary col-md-2" style="margin-top: 0.5em;">Add</button>
     </div>
 
@@ -50,6 +53,7 @@
                 <th class="col-md-2" scope="col">Redni broj</th>
                 <th class="col-md-8" scope="col">Usluga</th>
                 <th class="col-md-2" scope="col">Cena</th>
+                <th class="col-md-2" scope="col">Količina</th>
             </thead>
             <tbody>
                 <tr *ngFor="let stavka of stavke">
@@ -59,6 +63,8 @@
                         [(ngModel)]="stavka.usluga.naziv">{{stavka.usluga.naziv}}</td>
                     <td class="col-md-2" name="fieldName" ngDefaultControl [(ngModel)]="stavka.usluga.cena">
                         {{stavka.usluga.cena}}</td>
+                    <td class="col-md-2" name="fieldName" ngDefaultControl [(ngModel)]="stavka.kolicina">
+                        {{stavka.kolicina}}</td>
                 </tr>
             </tbody>
         </table>

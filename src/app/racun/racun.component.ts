@@ -26,7 +26,8 @@ export class RacunComponent implements OnInit {
   sveUsluge!: Usluga[];
   selectedUsluga!: Usluga;
 
-  ukupnaVrednost:number;
+  kolicina: number;
+  ukupnaVrednost: number;
 
   day: number;
   month: number;
@@ -41,6 +42,7 @@ export class RacunComponent implements OnInit {
     this.racun = new Racun();
     this.brojStavki = 0;
     this.ukupnaVrednost = 0;
+    this.kolicina = 1;
     this.stavke = new Array<StavkaRacuna>();
     this.day = new Date().getDate();
     this.month = new Date().getMonth() + 1;
@@ -67,10 +69,13 @@ export class RacunComponent implements OnInit {
     this.racun.vlasnikPosebnogDela = this.selectedVlasnik;
   }
 
-  addStavka(){
-    this.brojStavki +=1;
-    this.stavke.push(new StavkaRacuna(this.brojStavki, this.selectedUsluga.cena, this.selectedUsluga, new Racun()));
-    this.ukupnaVrednost +=  this.selectedUsluga.cena;
+  addStavka() {
+    if(!this.isNumber(this.kolicina) || this.kolicina <= 0){
+      alert("Kolicina mora da bude pozitivan broj.");
+    }
+    this.brojStavki += 1;
+    this.stavke.push(new StavkaRacuna(this.brojStavki, this.selectedUsluga.cena, this.kolicina, this.selectedUsluga, new Racun()));
+    this.ukupnaVrednost += this.kolicina * this.selectedUsluga.cena;
   }
 
   saveRacun() {
@@ -94,6 +99,12 @@ export class RacunComponent implements OnInit {
     this.day = new Date().getDate();
     this.month = new Date().getMonth() + 1;
     this.year = new Date().getFullYear();
+  }
+
+  isNumber(value: string | number): boolean {
+    return ((value != null) &&
+      (value !== '') &&
+      !isNaN(Number(value.toString())));
   }
 
   home() {
