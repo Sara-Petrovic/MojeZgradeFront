@@ -1,0 +1,89 @@
+<div class="container" style="margin-top: 0.5em;">
+    <label for="select-search-criteria">Izaberite kriterijum po kom pretrazujete:</label>
+    <select class="form-select" name="select-search-criteria" (change)="selectSearchCriteria()"
+        [(ngModel)]="searchCriteria">
+        <option value="pib">PIB</option>
+        <option value="maticniBroj">Maticni broj</option>
+        <option value="ulica-broj">Ulica i broj</option>
+    </select>
+</div>
+<div class="container" style="margin-top: 0.5em;">
+    <div class="row">
+        <div id="custom-search-input">
+            <div class="input-group col-md-6" id="search-by-pib" style="text-align: center" *ngIf="show[0]">
+                <input type="text" class="search-query form-control" placeholder="Pronadji stambenu zajednicu po PIB"
+                    name="pib" [(ngModel)]="pib" style="margin-right: 1em;" />
+                <span class="input-group-btn">
+                    <button class="btn btn-danger" type="button" (click)="findStambenaZajednicaByPibFromRemote()">
+                        <span class=" glyphicon glyphicon-search">Pronadji</span>
+                    </button>
+                </span>
+            </div>
+
+            <div class="input-group col-md-8" id="search-by-maticni-broj" style="text-align: center" *ngIf="show[1]">
+                <input type="text" class="search-query form-control"
+                    placeholder="Pronadji stambenu zajednicu po maticnom broju" name="maticniBroj" [(ngModel)]="maticniBroj" style="margin-right: 1em;"/>
+                <span class="input-group-btn">
+                    <button class="btn btn-danger" type="button" (click)="findStambenaZajednicaByMaticniBrojFromRemote()">
+                        <span class=" glyphicon glyphicon-search">Pronadji</span>
+                    </button>
+                </span>
+            </div>
+
+            <div class="input-group" id="search-by-ulica-broj" style="text-align: center" *ngIf="show[2]">
+                <input type="text" class="search-query form-control col-md-4"
+                    placeholder="Unesite ulicu" name="ulica" [(ngModel)]="ulica" style="margin-right: 1em;"/>
+                    <input type="text" class="search-query form-control col-md-4"
+                    placeholder="Unesite broj" name="broj" [(ngModel)]="broj" style="margin-right: 1em;"/>
+                <span class="input-group-btn">
+                    <button class="btn btn-danger" type="button" (click)="findStambenaZajednicaByUlicaIBrojFromRemote()">
+                        <span class=" glyphicon glyphicon-search">Pronadji</span>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="panel panel-primary" style="text-align: left">
+    <div class="panel-heading" style="margin-left: 7.5em; margin-top: 2em;"> 
+        <h2>Lista stambenih zajednica</h2>
+    </div>
+    <div class="container">
+        <div class="container" style="margin-top: 2em; margin-bottom: 2em;">
+            <div class="col-md-offset-2 custyle">
+                <table class="table table-striped custab">
+                    <thead>
+                        <tr>
+                            <th>Ulica</th>
+                            <th>Broj</th>
+                            <th>Mesto</th>
+                            <th>Maticni broj</th>
+                            <th>PIB</th>
+                            <th>Akcije</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let zajednica of zajednice | async">
+                            <td>{{zajednica.ulica}}</td>
+                            <td>{{zajednica.broj}}</td>
+                            <td>{{zajednica.mesto.naziv}}</td>
+                            <td>{{zajednica.maticniBroj}}</td>
+                            <td>{{zajednica.pib}}</td>
+
+                            <td><button (click)="deleteStambenaZajednica(zajednica.stambenaZajednicaId)"
+                                    class="btn btn-danger col-md-4">Delete</button>
+                                <button (click)="stambenaZajednicaDetails(zajednica.stambenaZajednicaId)"
+                                    class="btn btn-info col-md-4" style="margin-left: 0.5em">Details</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <button (click)="home()" class="btn btn-primary col-md-3" style="margin-left: 7.5em;" >Nazad na Home Page</button>
+</div>
+

@@ -1,24 +1,49 @@
-<form #menuform="ngForm" (ngSubmit)="openSaveStambenaZajednica()">
+<!-- <form #menuform="ngForm" (ngSubmit)="openSaveStambenaZajednica()">
     <button type="submit" class="btn btn-info">Kreiraj SZ</button>
-</form>
-<form #menuform2="ngForm" (ngSubmit)="openSaveVlasnikPosebnogDela()">
-<button type="submit" class="btn btn-info">Kreiraj vlasnika posebnog dela</button>
-</form>
+</form> -->
+
 <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
     <!-- Links -->
     <ul class="navbar-nav">
+
       <li class="nav-item">
-          <a routerLink="vlasnici" class="nav-link" routerLinkActive="active">Lista svih vlasnika</a>
+        <div class="dropdown">
+          <button class="dropbtn">Vlasnik posebnog dela</button>
+          <div class="dropdown-content">
+            <a routerLink="vlasnikposebnogdela" class="nav-link" routerLinkActive="active">Kreiraj vlasnika posebnog dela</a>
+            <a routerLink="vlasnici" class="nav-link" routerLinkActive="active">Lista svih vlasnika</a>
+          </div>
+        </div>
       </li>
-      <li class="nav-item">
-          <a routerLink="vlasnikposebnogdela" class="nav-link" routerLinkActive="active">Kreiraj novog vlasnika</a>
-      </li>
-      <li class="nav-item">
-        <a routerLink="sednice" class="nav-link" routerLinkActive="active">Lista svih sednica skupstine</a>
-    </li>
     <li class="nav-item">
-        <a routerLink="sednicaskupstine" class="nav-link" routerLinkActive="active">Kreiraj novu sednicu skupstine</a>
+      <div class="dropdown">
+        <button class="dropbtn">Sednica skupstine</button>
+        <div class="dropdown-content">
+          <a routerLink="sednicaskupstine" class="nav-link" routerLinkActive="active">Kreiraj novu sednicu skupstine</a>
+          <a routerLink="sednice" class="nav-link" routerLinkActive="active">Lista svih sednica skupstine</a>
+        </div>
+      </div>
     </li>
+
+      <li class="nav-item">
+        <div class="dropdown">
+          <button class="dropbtn">Stambena zajednica</button>
+          <div class="dropdown-content">
+            <a routerLink="stambenazajednica" routerLinkActive="active">Kreiraj stambenu zajednicu</a>
+            <a routerLink="stambene-zajednice" routerLinkActive="active">Lista svih stambenih zajednica</a>
+          </div>
+        </div>
+      </li>
+
+      <li class="nav-item">
+        <div class="dropdown">
+          <button class="dropbtn">Račun</button>
+          <div class="dropdown-content">
+            <!-- <a routerLink="stambenazajednica" routerLinkActive="active">Kreiraj stambenu zajednicu</a> -->
+            <a routerLink="racuni" routerLinkActive="active">Lista svih računa</a>
+          </div>
+        </div>
+      </li>
     </ul>
   </nav>
   <div class="container">
