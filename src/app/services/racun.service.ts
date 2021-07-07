@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Login } from '../model/login';
 import { Racun } from '../model/racun';
 import { User } from '../model/user';
 import { VlasnikPosebnogDela } from '../model/vlasnik-posebnog-dela';
@@ -12,8 +13,8 @@ export class RacunService {
 
   constructor(private _http: HttpClient) { }
 
-  getAllRacunFromRemote(user:User):Observable<any>{
-    return this._http.get<Racun>("http://localhost:8090/racun/all/" + user.userId);
+  getAllRacunFromRemote(login:Login):Observable<any>{
+    return this._http.get<Racun>("http://localhost:8090/racun/all/" + login.user.userId + "/" + login.token);
   }
   deleteRacunFromRemote(id: number){
     return this._http.delete<any>("http://localhost:8090/racun/" + id);
@@ -23,20 +24,16 @@ export class RacunService {
     return this._http.post<any>("http://localhost:8090/racun", racun);
   }
 
-  findRacunByStatusFromRemote(user:User, status:string){
-    return this._http.get<any>("http://localhost:8090/racun/user/" + user.userId + "/searchbystatus?status=" + status);
+  findRacunByStatusFromRemote(login:Login, status:string){
+    return this._http.get<any>("http://localhost:8090/racun/user/" + login.user.userId+ "/" + login.token + "/searchbystatus?status=" + status);
   }
   
   getRacunByIdFromRemote(id: number):Observable<any>{
     return this._http.get<Racun>("http://localhost:8090/racun/" + id);
   }
  
-  findRacunByVlasnikFromRemote(user:User, vlasnik:VlasnikPosebnogDela){
-    return this._http.get<any>("http://localhost:8090/racun/user/" + user.userId + "/searchbyvlasnik?vlasnik=" + vlasnik.vlasnikId);
-  }
-
-  findRacunByDatumFromRemote(datumOd:Date, datumDo:Date){
-    return this._http.get<any>("http://localhost:8090/racun/searchbydatum?datumOd=" + datumOd + "&datumDo=" + datumDo);
+  findRacunByVlasnikFromRemote(login:Login, vlasnik:VlasnikPosebnogDela){
+    return this._http.get<any>("http://localhost:8090/racun/user/" + login.user.userId + "/" + login.token + "/searchbyvlasnik?vlasnik=" + vlasnik.vlasnikId);
   }
 
   updateRacunFromRemote(id:number, updatedRacun: Racun){

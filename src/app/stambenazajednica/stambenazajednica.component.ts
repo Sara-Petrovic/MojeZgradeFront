@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Login } from '../model/login';
 import { Mesto } from '../model/mesto';
 import { StambenaZajednica } from '../model/stambena-zajednica';
 import { User } from '../model/user';
@@ -19,7 +20,7 @@ export class StambenazajednicaComponent implements OnInit {
   sZajednica = new StambenaZajednica();
   msg = '';
 
-  user = new User();
+  login:Login;
 
   constructor(private _service: StambenaZajednicaService, 
     private _router: Router,
@@ -27,12 +28,11 @@ export class StambenazajednicaComponent implements OnInit {
     let userJson: any = '';
     userJson = localStorage.getItem("loggedUser");
     console.log(userJson)
-    this.user = JSON.parse(userJson);
+    this.login = JSON.parse(userJson);
   }
 
   ngOnInit(): void {
     this.fillComboBoxMesta();
-
   }
 
   fillComboBoxMesta(): void {
@@ -48,8 +48,8 @@ export class StambenazajednicaComponent implements OnInit {
   }
 
   saveStambenaZajednica() {
-    console.log(this.user);
-    this.sZajednica.upravnik = this.user;
+    console.log(this.login);
+    this.sZajednica.upravnik = this.login.user;
     console.log(this.sZajednica);
     this._service.saveStambenaZajednicaFromRemote(this.sZajednica).subscribe(
       data => {
