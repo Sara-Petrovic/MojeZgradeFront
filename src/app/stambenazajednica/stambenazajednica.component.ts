@@ -21,8 +21,14 @@ export class StambenazajednicaComponent implements OnInit {
 
   user = new User();
 
-  constructor(private _service: StambenaZajednicaService, private _router: Router,
-    private _mestoService: MestoService) { }
+  constructor(private _service: StambenaZajednicaService, 
+    private _router: Router,
+    private _mestoService: MestoService) {
+    let userJson: any = '';
+    userJson = localStorage.getItem("loggedUser");
+    console.log(userJson)
+    this.user = JSON.parse(userJson);
+  }
 
   ngOnInit(): void {
     this.fillComboBoxMesta();
@@ -31,10 +37,10 @@ export class StambenazajednicaComponent implements OnInit {
 
   fillComboBoxMesta(): void {
     this._mestoService.getMesta()
-      .subscribe(mesto => {this.mesto = mesto; console.log(mesto)});
+      .subscribe(mesto => { this.mesto = mesto; console.log(mesto) });
   }
 
-  selected(){
+  selected() {
     this.sZajednica.mesto = this.selectedMesto
     console.log(this.selectedMesto.mestoId)
     console.log(this.selectedMesto.naziv)
@@ -42,14 +48,9 @@ export class StambenazajednicaComponent implements OnInit {
   }
 
   saveStambenaZajednica() {
-    this.user.userId = 0;
-    let userJson:any = '';
-    if(localStorage.getItem("loggedUser")){
-      userJson = localStorage.getItem("loggedUser");
-      this.sZajednica.upravnik = JSON.parse(userJson);
-    } else {
-      this.sZajednica.upravnik = this.user;
-    }
+    console.log(this.user);
+    this.sZajednica.upravnik = this.user;
+    console.log(this.sZajednica);
     this._service.saveStambenaZajednicaFromRemote(this.sZajednica).subscribe(
       data => {
         console.log("saved");
@@ -62,7 +63,7 @@ export class StambenazajednicaComponent implements OnInit {
     );
   }
 
-  home(){
+  home() {
     this._router.navigate(['loginsuccess']);
   }
 }
