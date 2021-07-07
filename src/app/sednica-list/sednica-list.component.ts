@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { SednicaSkupstine } from '../model/sednica-skupstine';
+import { User } from '../model/user';
 import { SednicaSkupstineService } from '../services/sednica-skupstine.service';
 
 
@@ -15,8 +16,16 @@ export class SednicaListComponent implements OnInit {
   sednice: Observable<SednicaSkupstine[]>;
   ulica: string;
 
+  user: User;
+
   constructor(private sednicaService: SednicaSkupstineService,
-    private router: Router) { }
+    private router: Router) {
+      let user = localStorage.getItem("loggedUser"); 
+      if (user == null) {
+        user = "";
+      }
+      this.user = JSON.parse(user);
+     }
 
   ngOnInit() {
     this.reloadData();
@@ -24,7 +33,7 @@ export class SednicaListComponent implements OnInit {
   }
 
   reloadData() {
-    this.sednice = this.sednicaService.getAllSedniceSkupstine();
+    this.sednice = this.sednicaService.getAllSedniceSkupstine(this.user);
     
   }
 
@@ -34,9 +43,9 @@ export class SednicaListComponent implements OnInit {
   }
   findSednicaByUlica(){
     if (this.ulica == "") {
-      this.sednice = this.sednicaService.getAllSedniceSkupstine();
+      this.sednice = this.sednicaService.getAllSedniceSkupstine(this.user);
     } else {
-      this.sednice = this.sednicaService.getSednicaSkupstineByUlicaFromRemote(this.ulica);
+      this.sednice = this.sednicaService.getSednicaSkupstineByUlicaFromRemote(this.ulica,this.user);
     }
   }
 
