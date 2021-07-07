@@ -6,6 +6,7 @@ import { VlasnikPosebnogDelaService } from '../services/vlasnik-posebnog-dela.se
 import { JedinicaMere } from '../model/jedinica-mere'
 import { StambenaZajednicaService } from '../services/stambena-zajednica.service';
 import { StambenaZajednica } from '../model/stambena-zajednica';
+import { User } from '../model/user';
 
 @Component({
   selector: 'app-vlasnik',
@@ -21,6 +22,8 @@ export class VlasnikComponent implements OnInit {
   
   msg = '';
 
+  user:User;
+
   jediniceMere: Array<string> = Object.keys(JedinicaMere).filter(key => isNaN(+key));
   selectedJedinicaMere!: JedinicaMere;
 
@@ -31,7 +34,11 @@ export class VlasnikComponent implements OnInit {
       this.vlasnik.brojPosebnogDela="1";
       this.vlasnik.ime="";
       this.vlasnik.prezime="";
-     
+      let user = localStorage.getItem("loggedUser"); 
+      if (user == null) {
+        user = "";
+      }
+      this.user = JSON.parse(user);
      
     }
 
@@ -42,7 +49,7 @@ export class VlasnikComponent implements OnInit {
   }
 
   fillComboBoxStambenaZajednica(): void {
-    this._serviceSZ.getAllStambenaZajednicaFromRemote()
+    this._serviceSZ.getAllStambenaZajednicaFromRemoteForUser(this.user)
       .subscribe(stambeneZajednice => { this.stambeneZajednice = stambeneZajednice; 
         this.selectedStambenaZajednica = this.stambeneZajednice[0];
         this.vlasnik.stambenaZajednica = this.selectedStambenaZajednica;
