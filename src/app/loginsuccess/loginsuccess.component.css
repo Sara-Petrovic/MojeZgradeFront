@@ -33,3 +33,22 @@
 .dropdown:hover .dropdown-content {display: block;}
   
 .dropdown:hover .dropbtn {background-color: #0952c0;}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 350px;
+    height: 350px;
+  }
+
+  .footer {
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:60px;   /* Height of the footer */
+    background:#0d6efd;
+}
+.container{
+    text-align: center;
+}
