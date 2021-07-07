@@ -8,6 +8,7 @@ import { StambenaZajednicaService } from '../services/stambena-zajednica.service
 import { VlasnikPosebnogDelaService } from '../services/vlasnik-posebnog-dela.service';
 import { FormBuilder, FormGroup, FormArray, FormControl, ValidatorFn } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { User } from '../model/user';
 
 
 @Component({
@@ -22,13 +23,21 @@ export class SednicaCreateComponent implements OnInit {
   vlasnici: VlasnikPosebnogDela[];
   selectedVlasnici: VlasnikPosebnogDela[];
 
+  user:User;
+
 
   sednica = new SednicaSkupstine();
   msg = '';
 
 
   constructor(private _serviceSS: SednicaSkupstineService, private _service: VlasnikPosebnogDelaService, private _serviceSZ: StambenaZajednicaService,
-    private _router: Router, private _datePipe: DatePipe) { }
+    private _router: Router, private _datePipe: DatePipe) { 
+      let user = localStorage.getItem("loggedUser"); 
+      if (user == null) {
+        user = "";
+      }
+      this.user = JSON.parse(user);
+    }
 
   ngOnInit(): void {
     this.fillComboBoxStambenaZajednica();
@@ -43,7 +52,7 @@ export class SednicaCreateComponent implements OnInit {
   }
 
   fillComboBoxStambenaZajednica(): void {
-    this._serviceSZ.getAllStambenaZajednicaFromRemote()
+    this._serviceSZ.getAllStambenaZajednicaFromRemoteForUser(this.user)
       .subscribe(stambeneZajednice => {
         this.stambeneZajednice = stambeneZajednice;
         this.selectedStambenaZajednica = this.stambeneZajednice[0];
