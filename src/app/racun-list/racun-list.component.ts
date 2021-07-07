@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { Racun } from '../model/racun';
+import { User } from '../model/user';
+import { VlasnikPosebnogDela } from '../model/vlasnik-posebnog-dela';
+import { RacunService } from '../services/racun.service';
+import { VlasnikPosebnogDelaService } from '../services/vlasnik-posebnog-dela.service';
 
 @Component({
   selector: 'app-racun-list',
@@ -7,14 +13,77 @@ import { Router } from '@angular/router';
   styleUrls: ['./racun-list.component.css']
 })
 export class RacunListComponent implements OnInit {
+  vlasnici!: VlasnikPosebnogDela[];
+  selectedVlasnik!: VlasnikPosebnogDela;
 
-  constructor(private router:Router) { }
+  racuni!: Observable<Racun[]>;
+  searchCriteria!: string;
+  show: Array<boolean>;
+  status!: string;
+  vlasnik!: VlasnikPosebnogDela;
 
-  ngOnInit(): void {
+  user: User;
+
+  constructor(private racunService: RacunService,
+    private router: Router,
+    private vlasnikService: VlasnikPosebnogDelaService) {
+    this.show = new Array<boolean>(3);
+    this.show[0] = true;
+    this.show[1] = false;
+
+    let user = localStorage.getItem("loggedUser");
+    if (user == null) {
+      user = "";
+    }
+    this.user = JSON.parse(user);
   }
 
+  ngOnInit(): void {
+    this.reloadData();
+    this.vlasnik = new VlasnikPosebnogDela;
+    this.status = "";
+    this.selectSearchCriteria();
+  }
 
-  home(){
+  fillComboBoxVlasnici(): void {
+    this.vlasnikService.getAllVlasnikPosebnogDelaFromRemote()
+      .subscribe(vlasnici => { this.vlasnici = vlasnici; console.log(vlasnici) });
+  }
+  
+  home() {
     this.router.navigate(['loginsuccess']);
+  }
+
+  reloadData() {
+    this.racuni = this.racunService.getAllRacunFromRemote(this.user);
+  }
+
+  findRacunByStatusFromRemote() {
+    if (this.status == "") {
+      // let user = JSON.parse( localStorage.getItem("loggedUser"));
+      this.racuni = this.racunService.getAllRacunFromRemote(this.user);
+    } else {
+      this.racuni = this.racunService.findRacunByStatusFromRemote(this.user, this.status);
+    }
+  }
+
+  selectSearchCriteria() {
+    if (this.searchCriteria == "vlasnik") {
+      this.fillComboBoxVlasnici();
+      this.show[0] = false;
+      this.show[1] = true;
+    } else {
+      this.status = "";
+      this.show[0] = true;
+      this.show[1] = false;
+    }
+  }
+
+  findRacunByVlasnikFromRemote() {
+    this.racuni = this.racunService.findRacunByVlasnikFromRemote(this.user, this.selectedVlasnik);
+  }
+
+  racunDetails(id: number) {
+    this.router.navigate(['detailsracun', id]);
   }
 }
