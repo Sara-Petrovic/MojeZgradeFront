@@ -19,7 +19,7 @@ export class VlasnikListComponent implements OnInit {
   constructor(private vlasnikService: VlasnikPosebnogDelaService,
     private router: Router) {
       let user = localStorage.getItem("loggedUser"); 
-      if (user == null) {
+      if (user == null || user == "") {
         user = "";
         this.router.navigate(['']);
       }

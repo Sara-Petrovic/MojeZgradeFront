@@ -57,7 +57,10 @@ export class StambenazajednicaListComponent implements OnInit {
           console.log(data);
           this.reloadData();
         },
-        error => console.log(error));
+        error => { 
+          console.log(error); 
+          alert("Stambena zajednica ne može dok postoje njeni vlasnici u bazi") 
+        });
   }
 
   stambenaZajednicaDetails(id: number) {
@@ -74,7 +77,7 @@ export class StambenazajednicaListComponent implements OnInit {
       alert("PIB mora da ima tačno 9 cifara.");
       this.zajednice = this.szService.getAllStambenaZajednicaFromRemoteForUser(this.login);
     } else {
-      this.zajednice = this.szService.findStambenaZajednicaByPibFromRemote(this.login,this.pib);
+      this.zajednice = this.szService.findStambenaZajednicaByPibFromRemote(this.login, this.pib);
     }
   }
 

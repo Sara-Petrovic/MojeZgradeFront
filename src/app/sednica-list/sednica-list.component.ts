@@ -32,7 +32,7 @@ export class SednicaListComponent implements OnInit {
   }
 
   reloadData() {
-    this.sednice = this.sednicaService.getAllSedniceSkupstine(this.login.user);
+    this.sednice = this.sednicaService.getAllSedniceSkupstine(this.login);
     
   }
 
@@ -41,9 +41,9 @@ export class SednicaListComponent implements OnInit {
   }
   findSednicaByUlica(){
     if (this.ulica == "") {
-      this.sednice = this.sednicaService.getAllSedniceSkupstine(this.login.user);
+      this.sednice = this.sednicaService.getAllSedniceSkupstine(this.login);
     } else {
-      this.sednice = this.sednicaService.getSednicaSkupstineByUlicaFromRemote(this.ulica,this.login.user);
+      this.sednice = this.sednicaService.getSednicaSkupstineByUlicaFromRemote(this.ulica, this.login);
     }
   }
 
