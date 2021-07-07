@@ -6,6 +6,8 @@ import { VlasnikPosebnogDela } from '../model/vlasnik-posebnog-dela';
 import { SednicaSkupstineService } from '../services/sednica-skupstine.service';
 import { StambenaZajednicaService } from '../services/stambena-zajednica.service';
 import { VlasnikPosebnogDelaService } from '../services/vlasnik-posebnog-dela.service';
+import { FormBuilder, FormGroup, FormArray, FormControl, ValidatorFn } from '@angular/forms';
+
 
 @Component({
   selector: 'app-sednica-create',
@@ -30,7 +32,10 @@ export class SednicaCreateComponent implements OnInit {
   ngOnInit(): void {
     this.fillComboBoxStambenaZajednica();
     this.sednica.datumOdrzavanja= new Date();
-   // this.vlasnici = new Array();
+    this.selectedVlasnici = new Array();
+    this.vlasnici = new Array();
+    this.sednica.vlasnici = new Array();
+    this.sednica.stambenaZajednica = new StambenaZajednica();
   }
 
   fillComboBoxStambenaZajednica(): void {
@@ -50,10 +55,22 @@ export class SednicaCreateComponent implements OnInit {
     console.log(this.selectedStambenaZajednica.mesto.naziv)
     this.fillComboBoxVlasnici();
   }
+  onCheck(vlasnikId:any) {
+    if (!this.selectedVlasnici.includes(vlasnikId)) {
+      this.selectedVlasnici.push(vlasnikId);
+    } else {
+      var index = this.selectedVlasnici.indexOf(vlasnikId);
+      if (index > -1) {
+        this.selectedVlasnici.splice(index, 1);
+      }
+    }
+    console.log(this.selectedVlasnici);
+    this.sednica.vlasnici = this.selectedVlasnici;
+    console.log(this.sednica.vlasnici[0].ime)
+  }
 
 
   saveSednicaSkupstine() {
-
     this._serviceSS.saveSednicaSkupstineFromRemote(this.sednica).subscribe(
       data => {
         console.log("saved sednica");
@@ -61,6 +78,7 @@ export class SednicaCreateComponent implements OnInit {
       },
       error => {
         console.log("exception occured");
+        console.log(this.sednica);
         this.msg = "Sednica skupstine nije sacuvana.";
       }
     );
