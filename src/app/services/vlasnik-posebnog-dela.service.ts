@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { User } from '../model/user';
 import { VlasnikPosebnogDela } from '../model/vlasnik-posebnog-dela';
 
 @Injectable({
@@ -15,16 +16,16 @@ export class VlasnikPosebnogDelaService {
 
   }
 
-  getAllVlasnikPosebnogDelaFromRemote(){
-    return this._http.get<any>("http://localhost:8090/vlasnikposebnogdela");
+  getAllVlasnikPosebnogDelaFromRemote(user:User){
+    return this._http.get<any>("http://localhost:8090/vlasnikposebnogdela/"+ user.userId);
 
   }
   getVlasnikPosebnogDelaFromRemote(vlasnikId:number){
-    return this._http.get<any>("http://localhost:8090/vlasnikposebnogdela/"+ vlasnikId);
+    return this._http.get<any>("http://localhost:8090/findvlasnikbyid/"+ vlasnikId);
 
   }
-  getVlasnikByPrezimeFromRemote(vlasnikPrezime:string){
-    return this._http.get<any>("http://localhost:8090/findvlasnikbyprezime/"+ vlasnikPrezime);
+  getVlasnikByPrezimeFromRemote(vlasnikPrezime:string, user:User){
+    return this._http.get<any>("http://localhost:8090/findvlasnikbyprezime/"+ vlasnikPrezime+ "/" + user.userId);
 
   }
   getAllVlasniciByStambenaZajednicaFromRemote(szId:number) {

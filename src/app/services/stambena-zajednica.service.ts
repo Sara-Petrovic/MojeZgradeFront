@@ -15,9 +15,9 @@ export class StambenaZajednicaService {
     return this._http.post<any>("http://localhost:8090/stambenazajednica", sZajednica);
   }
 
-  getAllStambenaZajednicaFromRemote():Observable<any>{
-    return this._http.get<StambenaZajednica>("http://localhost:8090/stambenazajednica");
-  }
+ // getAllStambenaZajednicaFromRemote():Observable<any>{
+ //   return this._http.get<StambenaZajednica>("http://localhost:8090/stambenazajednica");
+  //}
 
   getAllStambenaZajednicaFromRemoteForUser(user:User):Observable<any>{
     return this._http.get<StambenaZajednica>("http://localhost:8090/stambenazajednica/all/" + user.userId);
