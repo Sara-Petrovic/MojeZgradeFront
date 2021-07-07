@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Login } from '../model/login';
 import { Racun } from '../model/racun';
 import { StavkaRacuna } from '../model/stavka-racuna';
 import { Usluga } from '../model/usluga';
@@ -29,9 +30,11 @@ export class RacunComponent implements OnInit {
   kolicina: number;
   ukupnaVrednost: number;
 
-  day: number;
-  month: number;
-  year: number;
+  login:Login;
+
+  // day: number;
+  // month: number;
+  // year: number;
 
   msg = '';
 
@@ -44,10 +47,17 @@ export class RacunComponent implements OnInit {
     this.ukupnaVrednost = 0;
     this.kolicina = 1;
     this.stavke = new Array<StavkaRacuna>();
-    this.day = new Date().getDate();
-    this.month = new Date().getMonth() + 1;
-    this.year = new Date().getFullYear();
-    this.racun.datumIzdavanja.setFullYear(this.year, this.month, this.day);
+    this.racun.datumIzdavanja.setDate(Date.now());
+    let login = localStorage.getItem("loggedUser");
+    if(login != null){ 
+      this.login = JSON.parse(login);
+    } else {
+      this.login = new Login();
+    }
+    // this.day = new Date().getDate();
+    // this.month = new Date().getMonth() + 1;
+    // this.year = new Date().getFullYear();
+    // this.racun.datumIzdavanja.setFullYear(this.year, this.month, this.day);
   }
 
   ngOnInit(): void {
@@ -79,12 +89,9 @@ export class RacunComponent implements OnInit {
   }
 
   saveRacun() {
-    let user = localStorage.getItem("loggedUser");
-    if(user == null){ user = "";}
-    console.log(JSON.parse(user));
-    this.racun.upravnik = JSON.parse(user);
-    this.racun.racunId = 1;
-    this.racun.datumIzdavanja.setFullYear(this.year, this.month - 1, this.day);
+    this.racun.upravnik = this.login.user;
+    // this.racun.racunId = 1;
+    // this.racun.datumIzdavanja.setFullYear(this.year, this.month - 1, this.day);
     this.racun.stavke = this.stavke;
     this.racun.ukupnaVrednost = this.ukupnaVrednost;
     console.log(this.racun);
@@ -94,15 +101,15 @@ export class RacunComponent implements OnInit {
         this.router.navigate(['/loginsuccess'])
       },
       error => {
-        console.log("exception occured");
+        console.log(error);
         this.msg = "Racun nije sacuvan.";
       }
     );
     this.brojStavki = 0;
     this.ukupnaVrednost = 0;
-    this.day = new Date().getDate();
-    this.month = new Date().getMonth() + 1;
-    this.year = new Date().getFullYear();
+    // this.day = new Date().getDate();
+    // this.month = new Date().getMonth() + 1;
+    // this.year = new Date().getFullYear();
   }
 
   isNumber(value: string | number): boolean {
