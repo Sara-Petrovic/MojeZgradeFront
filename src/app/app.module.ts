@@ -21,6 +21,7 @@ import { StambenazajednicaDetailsComponent } from './stambenazajednica-details/s
 import { RacunListComponent } from './racun-list/racun-list.component';
 import { RacunComponent } from './racun/racun.component';
 import { RacunDetailsComponent } from './racun-details/racun-details.component';
+import { NavFooterComponent } from './components/footer/nav-footer.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { RacunDetailsComponent } from './racun-details/racun-details.component';
     StambenazajednicaDetailsComponent,
     RacunListComponent,
     RacunComponent,
-    RacunDetailsComponent
+    RacunDetailsComponent,
+    NavFooterComponent
   ],
   imports: [
     BrowserModule,

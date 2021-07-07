@@ -1,8 +1,5 @@
-import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { data } from 'jquery';
 import { User } from '../model/user';
 import { RegistrationService } from '../services/registration.service';
 
@@ -15,7 +12,8 @@ export class LoginComponent implements OnInit {
   user = new User();
   msg = '';
 
-  constructor(private _service: RegistrationService, private _router: Router) { }
+  constructor(private _service: RegistrationService, 
+    private _router: Router) { }
 
   ngOnInit(): void {
   }

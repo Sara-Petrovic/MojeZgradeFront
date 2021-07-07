@@ -1,25 +1,26 @@
 <div class="container">
   <div class="row">
-             <div id="custom-search-input">
-                              <div class="input-group col-md-8" style="text-align: center">
-                                  <input type="text" class="search-query form-control" placeholder="Pronadji vlasnika po prezimenu"  name="prezime" [(ngModel)]="prezime"/>
-                                  <span class="input-group-btn">
-                                      <button class="btn btn-danger" type="button" (click)="findVlasnikByPrezime()">
-                                          <span class=" glyphicon glyphicon-search">Pronadji</span>
-                                      </button>
-                                  </span>
-                              </div>
-                          </div>
+    <div id="custom-search-input">
+      <div class="input-group col-md-8" style="text-align: center">
+        <input type="text" class="search-query form-control" placeholder="Pronadji vlasnika po prezimenu" name="prezime"
+          [(ngModel)]="prezime" />
+        <span class="input-group-btn">
+          <button class="btn btn-danger" type="button" (click)="findVlasnikByPrezime()">
+            <span class=" glyphicon glyphicon-search">Pronadji</span>
+          </button>
+        </span>
+      </div>
+    </div>
   </div>
-  </div>
+</div>
 <div class="panel panel-primary" style="text-align: center">
-  <div class="panel-heading" >
+  <div class="panel-heading">
     <h2>Lista vlasnika</h2>
   </div>
-  <div class="container" >
+  <div class="container">
     <div class="container">
       <div class="row col-md-8 col-md-offset-2 custyle">
-        <table class="table table-striped custab" >
+        <table class="table table-striped custab">
           <thead>
             <tr>
               <th>Ime</th>
@@ -47,3 +48,6 @@
         </table>
       </div>
     </div>
+  </div>
+</div>
+<app-footer></app-footer>
