@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Racun } from '../model/racun';
 import { StavkaRacuna } from '../model/stavka-racuna';
+import { User } from '../model/user';
 import { Usluga } from '../model/usluga';
 import { VlasnikPosebnogDela } from '../model/vlasnik-posebnog-dela';
 import { RacunService } from '../services/racun.service';
@@ -35,6 +36,8 @@ export class RacunComponent implements OnInit {
 
   msg = '';
 
+  user:User;
+
   constructor(private racunService: RacunService,
     private vlasnikService: VlasnikPosebnogDelaService,
     private uslugeService: UslugaService,
@@ -48,6 +51,12 @@ export class RacunComponent implements OnInit {
     this.month = new Date().getMonth() + 1;
     this.year = new Date().getFullYear();
     this.racun.datumIzdavanja.setFullYear(this.year, this.month, this.day);
+
+    let user = localStorage.getItem("loggedUser"); 
+      if (user == null) {
+        user = "";
+      }
+      this.user = JSON.parse(user);
   }
 
   ngOnInit(): void {
@@ -56,7 +65,7 @@ export class RacunComponent implements OnInit {
   }
 
   fillComboBoxVlasnici(): void {
-    this.vlasnikService.getAllVlasnikPosebnogDelaFromRemote()
+    this.vlasnikService.getAllVlasnikPosebnogDelaFromRemote(this.user)
       .subscribe(vlasnici => { this.vlasnici = vlasnici; console.log(vlasnici) });
   }
 
