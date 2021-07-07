@@ -13,26 +13,41 @@ import { StambenaZajednica } from '../model/stambena-zajednica';
   styleUrls: ['./vlasnik.component.css']
 })
 export class VlasnikComponent implements OnInit {
-  stambeneZajednice!: StambenaZajednica[];
-  selectedStambenaZajednica!: StambenaZajednica;
+  stambeneZajednice: StambenaZajednica[];
+  selectedStambenaZajednica: StambenaZajednica;
 
 
   vlasnik = new VlasnikPosebnogDela();
+  
   msg = '';
 
   jediniceMere: Array<string> = Object.keys(JedinicaMere).filter(key => isNaN(+key));
   selectedJedinicaMere!: JedinicaMere;
 
   constructor(private _service: VlasnikPosebnogDelaService, private _serviceSZ: StambenaZajednicaService,
-    private _router: Router) { }
+    private _router: Router) { 
+      this.vlasnik.velicinaPosebnogDela=0;
+      this.vlasnik.kontaktVlasnika="";
+      this.vlasnik.brojPosebnogDela="1";
+      this.vlasnik.ime="";
+      this.vlasnik.prezime="";
+     
+     
+    }
 
   ngOnInit(): void {
     this.fillComboBoxStambenaZajednica();
+    console.log(this.stambeneZajednice)
+    //this.selectedMernaJedinica=<JedinicaMere><unknown>this.jediniceMere[0];
   }
 
   fillComboBoxStambenaZajednica(): void {
     this._serviceSZ.getAllStambenaZajednicaFromRemote()
-      .subscribe(stambeneZajednice => { this.stambeneZajednice = stambeneZajednice; console.log(stambeneZajednice) });
+      .subscribe(stambeneZajednice => { this.stambeneZajednice = stambeneZajednice; 
+        this.selectedStambenaZajednica = this.stambeneZajednice[0];
+        this.vlasnik.stambenaZajednica = this.selectedStambenaZajednica;
+        console.log(stambeneZajednice) });
+
   }
 
   selected() {
@@ -56,7 +71,8 @@ export class VlasnikComponent implements OnInit {
       },
       error => {
         console.log("exception occured");
-        this.msg = "Vlasnik posebnog dela nije sacuvan.";
+        console.log(error)
+        this.msg = "Vlasnik posebnog dela nije sacuvan. " +  error.error.message;
       }
     );
   }
