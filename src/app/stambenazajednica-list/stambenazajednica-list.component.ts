@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Login } from '../model/login';
 import { StambenaZajednica } from '../model/stambena-zajednica';
-import { User } from '../model/user';
 import { StambenaZajednicaService } from '../services/stambena-zajednica.service';
 
 
@@ -32,6 +31,7 @@ export class StambenazajednicaListComponent implements OnInit {
     let login = localStorage.getItem("loggedUser");
     if (login == null) {
       login = "";
+      this.router.navigate(['']);
     }
     this.login = JSON.parse(login);
 

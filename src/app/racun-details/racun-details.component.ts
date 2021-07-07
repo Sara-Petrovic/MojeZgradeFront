@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Racun } from '../model/racun';
 import { RacunService } from '../services/racun.service';
-import { UslugaService } from '../services/usluga.service';
-import { VlasnikPosebnogDelaService } from '../services/vlasnik-posebnog-dela.service';
 
 @Component({
   selector: 'app-racun-details',
@@ -16,8 +14,6 @@ export class RacunDetailsComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private racunService: RacunService,
-    private vlasnikService: VlasnikPosebnogDelaService,
-    private uslugeService: UslugaService,
     private router: Router) { }
 
   ngOnInit(): void {

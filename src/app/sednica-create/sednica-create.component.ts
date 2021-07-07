@@ -6,9 +6,7 @@ import { VlasnikPosebnogDela } from '../model/vlasnik-posebnog-dela';
 import { SednicaSkupstineService } from '../services/sednica-skupstine.service';
 import { StambenaZajednicaService } from '../services/stambena-zajednica.service';
 import { VlasnikPosebnogDelaService } from '../services/vlasnik-posebnog-dela.service';
-import { FormBuilder, FormGroup, FormArray, FormControl, ValidatorFn } from '@angular/forms';
 import { DatePipe } from '@angular/common';
-import { User } from '../model/user';
 import { Login } from '../model/login';
 
 
@@ -26,16 +24,15 @@ export class SednicaCreateComponent implements OnInit {
 
   login:Login;
 
-
   sednica = new SednicaSkupstine();
   msg = '';
-
 
   constructor(private _serviceSS: SednicaSkupstineService, private _service: VlasnikPosebnogDelaService, private _serviceSZ: StambenaZajednicaService,
     private _router: Router, private _datePipe: DatePipe) { 
       let user = localStorage.getItem("loggedUser"); 
       if (user == null) {
         user = "";
+        this._router.navigate(['']);
       }
       this.login = JSON.parse(user);
     }
@@ -65,7 +62,7 @@ export class SednicaCreateComponent implements OnInit {
   }
 
   fillComboBoxVlasnici(): void {
-    this._service.getAllVlasniciByStambenaZajednicaFromRemote(this.selectedStambenaZajednica.stambenaZajednicaId)
+    this._service.getAllVlasniciByStambenaZajednicaFromRemote(this.selectedStambenaZajednica.stambenaZajednicaId, this.login)
       .subscribe(vlasnici => { this.vlasnici = vlasnici; console.log(vlasnici) });
   }
 
@@ -103,5 +100,6 @@ export class SednicaCreateComponent implements OnInit {
         this.msg = "Sednica skupstine nije sacuvana.";
       }
     );
+    alert("Sednica skupštine je uspešno sačuvan");
   }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Login } from '../model/login';
 import { Mesto } from '../model/mesto';
 import { StambenaZajednica } from '../model/stambena-zajednica';
 import { User } from '../model/user';
@@ -23,7 +24,7 @@ export class StambenazajednicaDetailsComponent implements OnInit {
 
   mesto!: Mesto[];
 
-  user:User;
+  login:Login;
 
   constructor(private route: ActivatedRoute, private router: Router,
     private sZajednicaService: StambenaZajednicaService,
@@ -32,8 +33,9 @@ export class StambenazajednicaDetailsComponent implements OnInit {
       let user = localStorage.getItem("loggedUser"); 
       if (user == null) {
         user = "";
+        this.router.navigate(['']);
       }
-      this.user = JSON.parse(user);
+      this.login = JSON.parse(user);
     }
 
   ngOnInit(): void {
@@ -45,7 +47,7 @@ export class StambenazajednicaDetailsComponent implements OnInit {
       .subscribe(data => {
         console.log(data)
         this.stambenaZajednica = data;
-        this.vlasnikService.getAllVlasniciByStambenaZajednicaFromRemote(this.stambenaZajednica.stambenaZajednicaId).subscribe(data => {
+        this.vlasnikService.getAllVlasniciByStambenaZajednicaFromRemote(this.stambenaZajednica.stambenaZajednicaId, this.login).subscribe(data => {
           console.log(data)
           this.vlasnici = data;
 

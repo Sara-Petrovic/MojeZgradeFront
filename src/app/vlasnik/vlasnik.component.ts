@@ -6,7 +6,6 @@ import { VlasnikPosebnogDelaService } from '../services/vlasnik-posebnog-dela.se
 import { JedinicaMere } from '../model/jedinica-mere'
 import { StambenaZajednicaService } from '../services/stambena-zajednica.service';
 import { StambenaZajednica } from '../model/stambena-zajednica';
-import { User } from '../model/user';
 import { Login } from '../model/login';
 
 @Component({
@@ -17,7 +16,6 @@ import { Login } from '../model/login';
 export class VlasnikComponent implements OnInit {
   stambeneZajednice!: StambenaZajednica[];
   selectedStambenaZajednica!: StambenaZajednica;
-
 
   vlasnik = new VlasnikPosebnogDela();
   
@@ -36,8 +34,9 @@ export class VlasnikComponent implements OnInit {
       this.vlasnik.ime="";
       this.vlasnik.prezime="";
       let user = localStorage.getItem("loggedUser"); 
-      if (user == null) {
+      if (user == null || user == "") {
         user = "";
+        this._router.navigate(['']);
       }
       this.login = JSON.parse(user);
      
@@ -46,7 +45,6 @@ export class VlasnikComponent implements OnInit {
   ngOnInit(): void {
     this.fillComboBoxStambenaZajednica();
     console.log(this.stambeneZajednice)
-    //this.selectedMernaJedinica=<JedinicaMere><unknown>this.jediniceMere[0];
   }
 
   fillComboBoxStambenaZajednica(): void {
@@ -71,7 +69,6 @@ export class VlasnikComponent implements OnInit {
 
 
   saveVlasnikPosebnogDela() {
-
     this._service.saveVlasnikPosebnogDelaFromRemote(this.vlasnik).subscribe(
       data => {
         console.log("saved vlasnik");
@@ -83,5 +80,6 @@ export class VlasnikComponent implements OnInit {
         this.msg = "Vlasnik posebnog dela nije sacuvan. " +  error.error.message;
       }
     );
+    alert("Vlasnik je uspešno sačuvan");
   }
 }

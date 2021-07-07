@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { Login } from '../model/login';
 import { Racun } from '../model/racun';
 import { StavkaRacuna } from '../model/stavka-racuna';
-import { User } from '../model/user';
 import { Usluga } from '../model/usluga';
 import { VlasnikPosebnogDela } from '../model/vlasnik-posebnog-dela';
 import { RacunService } from '../services/racun.service';
@@ -33,10 +32,6 @@ export class RacunComponent implements OnInit {
 
   login:Login;
 
-  // day: number;
-  // month: number;
-  // year: number;
-
   msg = '';
 
   constructor(private racunService: RacunService,
@@ -50,15 +45,12 @@ export class RacunComponent implements OnInit {
     this.stavke = new Array<StavkaRacuna>();
     this.racun.datumIzdavanja.setDate(Date.now());
     let login = localStorage.getItem("loggedUser");
-    if(login != null){ 
+    if(login != null && login != ""){ 
       this.login = JSON.parse(login);
     } else {
       this.login = new Login();
+      this.router.navigate(['']);
     }
-    // this.day = new Date().getDate();
-    // this.month = new Date().getMonth() + 1;
-    // this.year = new Date().getFullYear();
-    // this.racun.datumIzdavanja.setFullYear(this.year, this.month, this.day);
   }
 
   ngOnInit(): void {
@@ -67,7 +59,7 @@ export class RacunComponent implements OnInit {
   }
 
   fillComboBoxVlasnici(): void {
-    this.vlasnikService.getAllVlasnikPosebnogDelaFromRemote(this.login.user)
+    this.vlasnikService.getAllVlasnikPosebnogDelaFromRemote(this.login)
       .subscribe(vlasnici => { this.vlasnici = vlasnici; console.log(vlasnici) });
   }
 
@@ -91,8 +83,6 @@ export class RacunComponent implements OnInit {
 
   saveRacun() {
     this.racun.upravnik = this.login.user;
-    // this.racun.racunId = 1;
-    // this.racun.datumIzdavanja.setFullYear(this.year, this.month - 1, this.day);
     this.racun.stavke = this.stavke;
     this.racun.ukupnaVrednost = this.ukupnaVrednost;
     console.log(this.racun);
@@ -108,9 +98,7 @@ export class RacunComponent implements OnInit {
     );
     this.brojStavki = 0;
     this.ukupnaVrednost = 0;
-    // this.day = new Date().getDate();
-    // this.month = new Date().getMonth() + 1;
-    // this.year = new Date().getFullYear();
+    alert("Račun je uspešno sačuvan");
   }
 
   isNumber(value: string | number): boolean {

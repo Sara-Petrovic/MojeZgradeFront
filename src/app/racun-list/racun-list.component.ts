@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Login } from '../model/login';
 import { Racun } from '../model/racun';
-import { User } from '../model/user';
 import { VlasnikPosebnogDela } from '../model/vlasnik-posebnog-dela';
 import { RacunService } from '../services/racun.service';
 import { VlasnikPosebnogDelaService } from '../services/vlasnik-posebnog-dela.service';
@@ -33,8 +32,9 @@ export class RacunListComponent implements OnInit {
     this.show[1] = false;
 
     let user = localStorage.getItem("loggedUser");
-    if (user == null) {
+    if (user == null || user == "") {
       user = "";
+      this.router.navigate(['']);
     }
     this.login = JSON.parse(user);
   }
@@ -47,7 +47,7 @@ export class RacunListComponent implements OnInit {
   }
 
   fillComboBoxVlasnici(): void {
-    this.vlasnikService.getAllVlasnikPosebnogDelaFromRemote(this.login.user)
+    this.vlasnikService.getAllVlasnikPosebnogDelaFromRemote(this.login)
       .subscribe(vlasnici => { this.vlasnici = vlasnici; console.log(vlasnici) });
   }
   
