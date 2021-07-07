@@ -12,25 +12,25 @@
 
         <div class="form-group">
             <label for="ime">Ime:</label>
-            <input type="text" class="form-control" placeholder="Unesite ime" name="ime" [(ngModel)]="vlasnik.ime">
+            <input type="text" class="form-control" placeholder="Unesite ime" name="ime" minlength="3" [(ngModel)]="vlasnik.ime">
         </div>
 
         <div class="form-group">
             <label for="prezime">Prezime:</label>
-            <input type="text" class="form-control" placeholder="Unesite prezime" name="prezime"
+            <input type="text" class="form-control" placeholder="Unesite prezime" name="prezime" minlength="3"
                 [(ngModel)]="vlasnik.prezime">
         </div>
 
         <div class="form-group">
             <label for="broj">Broj posebnog dela:</label>
-            <input type="text" class="form-control" placeholder="Unesite broj posebnog dela" name="broj"
+            <input type="text" class="form-control" placeholder="Unesite broj posebnog dela" name="broj" minlength="1" required
                 [(ngModel)]="vlasnik.brojPosebnogDela">
         </div>
 
         <div class="form-group">
             <label for="velicina">Velicina posebnog dela:</label>
-            <input type="number" class="form-control" placeholder="Unesite velicinu posebnog dela" name="velicina"
-                [(ngModel)]="vlasnik.velicinaPosebnogDela">
+            <input type="number" class="form-control" placeholder="Unesite velicinu posebnog dela" name="velicina" 
+                [(ngModel)]="vlasnik.velicinaPosebnogDela" value="0" min="0" required>
         </div>
 
         <div class="form-group">

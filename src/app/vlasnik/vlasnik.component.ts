@@ -6,6 +6,8 @@ import { VlasnikPosebnogDelaService } from '../services/vlasnik-posebnog-dela.se
 import { JedinicaMere } from '../model/jedinica-mere'
 import { StambenaZajednicaService } from '../services/stambena-zajednica.service';
 import { StambenaZajednica } from '../model/stambena-zajednica';
+import { User } from '../model/user';
+import { Login } from '../model/login';
 
 @Component({
   selector: 'app-vlasnik',
@@ -18,21 +20,42 @@ export class VlasnikComponent implements OnInit {
 
 
   vlasnik = new VlasnikPosebnogDela();
+  
   msg = '';
+
+  login:Login;
 
   jediniceMere: Array<string> = Object.keys(JedinicaMere).filter(key => isNaN(+key));
   selectedJedinicaMere!: JedinicaMere;
 
   constructor(private _service: VlasnikPosebnogDelaService, private _serviceSZ: StambenaZajednicaService,
-    private _router: Router) { }
+    private _router: Router) { 
+      this.vlasnik.velicinaPosebnogDela=0;
+      this.vlasnik.kontaktVlasnika="";
+      this.vlasnik.brojPosebnogDela="1";
+      this.vlasnik.ime="";
+      this.vlasnik.prezime="";
+      let user = localStorage.getItem("loggedUser"); 
+      if (user == null) {
+        user = "";
+      }
+      this.login = JSON.parse(user);
+     
+    }
 
   ngOnInit(): void {
     this.fillComboBoxStambenaZajednica();
+    console.log(this.stambeneZajednice)
+    //this.selectedMernaJedinica=<JedinicaMere><unknown>this.jediniceMere[0];
   }
 
   fillComboBoxStambenaZajednica(): void {
-    this._serviceSZ.getAllStambenaZajednicaFromRemote()
-      .subscribe(stambeneZajednice => { this.stambeneZajednice = stambeneZajednice; console.log(stambeneZajednice) });
+    this._serviceSZ.getAllStambenaZajednicaFromRemoteForUser(this.login)
+      .subscribe(stambeneZajednice => { this.stambeneZajednice = stambeneZajednice; 
+        this.selectedStambenaZajednica = this.stambeneZajednice[0];
+        this.vlasnik.stambenaZajednica = this.selectedStambenaZajednica;
+        console.log(stambeneZajednice) });
+
   }
 
   selected() {
@@ -56,7 +79,8 @@ export class VlasnikComponent implements OnInit {
       },
       error => {
         console.log("exception occured");
-        this.msg = "Vlasnik posebnog dela nije sacuvan.";
+        console.log(error)
+        this.msg = "Vlasnik posebnog dela nije sacuvan. " +  error.error.message;
       }
     );
   }

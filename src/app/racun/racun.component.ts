@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Login } from '../model/login';
 import { Racun } from '../model/racun';
 import { StavkaRacuna } from '../model/stavka-racuna';
+import { User } from '../model/user';
 import { Usluga } from '../model/usluga';
 import { VlasnikPosebnogDela } from '../model/vlasnik-posebnog-dela';
 import { RacunService } from '../services/racun.service';
@@ -66,7 +67,7 @@ export class RacunComponent implements OnInit {
   }
 
   fillComboBoxVlasnici(): void {
-    this.vlasnikService.getAllVlasnikPosebnogDelaFromRemote()
+    this.vlasnikService.getAllVlasnikPosebnogDelaFromRemote(this.login.user)
       .subscribe(vlasnici => { this.vlasnici = vlasnici; console.log(vlasnici) });
   }
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Mesto } from '../model/mesto';
 import { StambenaZajednica } from '../model/stambena-zajednica';
+import { User } from '../model/user';
 import { VlasnikPosebnogDela } from '../model/vlasnik-posebnog-dela';
 import { MestoService } from '../services/mesto.service';
 import { StambenaZajednicaService } from '../services/stambena-zajednica.service';
@@ -22,10 +23,18 @@ export class StambenazajednicaDetailsComponent implements OnInit {
 
   mesto!: Mesto[];
 
+  user:User;
+
   constructor(private route: ActivatedRoute, private router: Router,
     private sZajednicaService: StambenaZajednicaService,
     private vlasnikService: VlasnikPosebnogDelaService,
-    private _mestoService: MestoService) { }
+    private _mestoService: MestoService) { 
+      let user = localStorage.getItem("loggedUser"); 
+      if (user == null) {
+        user = "";
+      }
+      this.user = JSON.parse(user);
+    }
 
   ngOnInit(): void {
     this.stambenaZajednica = new StambenaZajednica();

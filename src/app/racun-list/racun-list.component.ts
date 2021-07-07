@@ -47,7 +47,7 @@ export class RacunListComponent implements OnInit {
   }
 
   fillComboBoxVlasnici(): void {
-    this.vlasnikService.getAllVlasnikPosebnogDelaFromRemote()
+    this.vlasnikService.getAllVlasnikPosebnogDelaFromRemote(this.login.user)
       .subscribe(vlasnici => { this.vlasnici = vlasnici; console.log(vlasnici) });
   }
   

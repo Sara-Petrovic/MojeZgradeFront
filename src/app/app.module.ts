@@ -22,6 +22,7 @@ import { RacunListComponent } from './racun-list/racun-list.component';
 import { RacunComponent } from './racun/racun.component';
 import { RacunDetailsComponent } from './racun-details/racun-details.component';
 import { NavFooterComponent } from './components/footer/nav-footer.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,7 @@ import { NavFooterComponent } from './components/footer/nav-footer.component';
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { JedinicaMere } from '../model/jedinica-mere';
+import { Login } from '../model/login';
 import { Mesto } from '../model/mesto';
 import { StambenaZajednica } from '../model/stambena-zajednica';
+import { User } from '../model/user';
 import { VlasnikPosebnogDela } from '../model/vlasnik-posebnog-dela';
 import { StambenaZajednicaService } from '../services/stambena-zajednica.service';
 import { VlasnikPosebnogDelaService } from '../services/vlasnik-posebnog-dela.service';
@@ -14,19 +16,29 @@ import { VlasnikPosebnogDelaService } from '../services/vlasnik-posebnog-dela.se
 })
 export class VlasnikUpdateComponent implements OnInit {
 
-  stambeneZajednice: StambenaZajednica[];
-  selectedStambenaZajednica: StambenaZajednica;
+  stambeneZajednice!: StambenaZajednica[];
+  selectedStambenaZajednica!: StambenaZajednica;
 
-  vlasnikId: number;
-  vlasnik: VlasnikPosebnogDela;
+  vlasnikId!: number;
+  vlasnik!: VlasnikPosebnogDela;
 
   msg = '';
 
   jediniceMere: Array<string> = Object.keys(JedinicaMere).filter(key => isNaN(+key));
-  selectedJedinicaMere: JedinicaMere;
+  selectedJedinicaMere!: JedinicaMere;
+
+  login:Login;
 
   constructor(private route: ActivatedRoute, private router: Router,
-    private vlasnikService: VlasnikPosebnogDelaService, private szService: StambenaZajednicaService) { }
+    private vlasnikService: VlasnikPosebnogDelaService, private szService: StambenaZajednicaService) { 
+
+      let user = localStorage.getItem("loggedUser"); 
+      if (user == null) {
+        user = "";
+      }
+      this.login = JSON.parse(user);
+     
+    }
 
   ngOnInit() {
     this.fillComboBoxStambenaZajednica();
@@ -53,7 +65,7 @@ export class VlasnikUpdateComponent implements OnInit {
   }
 
   fillComboBoxStambenaZajednica(): void {
-    this.szService.getAllStambenaZajednicaFromRemote()
+    this.szService.getAllStambenaZajednicaFromRemoteForUser(this.login)
       .subscribe(stambeneZajednice => { this.stambeneZajednice = stambeneZajednice; console.log(stambeneZajednice) });
   }
 

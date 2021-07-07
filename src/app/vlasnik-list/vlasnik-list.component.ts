@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { User } from '../model/user';
 import { VlasnikPosebnogDela } from '../model/vlasnik-posebnog-dela';
 import { VlasnikPosebnogDelaService } from '../services/vlasnik-posebnog-dela.service';
 
@@ -13,9 +14,16 @@ export class VlasnikListComponent implements OnInit {
 
   vlasnici: Observable<VlasnikPosebnogDela[]>;
   prezime: string;
+  user: User;
 
   constructor(private vlasnikService: VlasnikPosebnogDelaService,
-    private router: Router) { }
+    private router: Router) {
+      let user = localStorage.getItem("loggedUser"); 
+      if (user == null) {
+        user = "";
+      }
+      this.user = JSON.parse(user);
+    }
 
   ngOnInit() {
     this.reloadData();
@@ -23,7 +31,7 @@ export class VlasnikListComponent implements OnInit {
   }
 
   reloadData() {
-    this.vlasnici = this.vlasnikService.getAllVlasnikPosebnogDelaFromRemote();
+    this.vlasnici = this.vlasnikService.getAllVlasnikPosebnogDelaFromRemote(this.user);
   }
 
   deleteVlasnik(id: number) {
@@ -44,9 +52,9 @@ export class VlasnikListComponent implements OnInit {
   }
   findVlasnikByPrezime() {
     if (this.prezime == "") {
-      this.vlasnici = this.vlasnikService.getAllVlasnikPosebnogDelaFromRemote();
+      this.vlasnici = this.vlasnikService.getAllVlasnikPosebnogDelaFromRemote(this.user);
     } else {
-      this.vlasnici = this.vlasnikService.getVlasnikByPrezimeFromRemote(this.prezime);
+      this.vlasnici = this.vlasnikService.getVlasnikByPrezimeFromRemote(this.prezime,this.user);
     }
   }
 
