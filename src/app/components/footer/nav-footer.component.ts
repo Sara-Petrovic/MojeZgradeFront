@@ -18,13 +18,13 @@ export class NavFooterComponent implements OnInit {
   logout() {
     let user = localStorage.getItem("loggedUser");
     if (user != null && user != "") {
-      console.log(user)
       this.loginService.logoutUserFromRemote(JSON.parse(user)).subscribe(
         data => {
           localStorage.setItem("loggedUser", JSON.stringify(data));
           this.router.navigate(['/loginsuccess']);
         },
         error => {
+          console.log(error);
           alert("Nije moguce da se izlogujete jer korisnik nije ulogovan ili registrovan");
           this.router.navigate(['']);
         }
