@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-loginsuccess',
-  templateUrl: './loginsuccess.component.html',
-  styleUrls: ['./loginsuccess.component.css']
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
 })
-export class LoginsuccessComponent implements OnInit {
+export class HomeComponent implements OnInit {
 
+ 
   constructor(private _router:Router) { }
 
   ngOnInit(): void {
@@ -16,5 +17,6 @@ export class LoginsuccessComponent implements OnInit {
   openSaveVlasnikPosebnogDela(){
     this._router.navigate(['/vlasnikposebnogdela']);
   }
+
 
 }

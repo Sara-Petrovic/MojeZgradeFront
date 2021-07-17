@@ -1,0 +1,53 @@
+<h2>Detaljni podaci o sednici skupstine</h2>
+
+<hr />
+<div *ngIf="sednica" class="container">
+    <div>
+        <label><b>Sednica skupstine ID: </b></label> {{sednica.sednicaSkupstineId}}
+    </div>
+    <div>
+        <label><b>Datum odrzavanja: </b></label> {{sednica.datumOdrzavanja | date}}
+    </div>
+    <div>
+        <label><b>Stambena zajednica: </b></label> {{sednica.stambenaZajednica.ulica}}
+        {{sednica.stambenaZajednica.broj}}, {{sednica.stambenaZajednica.mesto.naziv}}
+    </div>
+    <div>
+        <label><b>Broj prisutnih: </b></label> {{sednica.brojPrisutnih}}
+    </div>
+    <div>
+        <label><b>Dnevni red: </b></label> {{sednica.dnevniRed}}
+    </div>
+    <div>
+        <b>Vlasnici koji su prisustvovali sednici skupstine:</b>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Vlasnik ID</th>
+                    <th>Ime</th>
+                    <th>Prezime</th>
+                    <th>Broj stana</th>
+                    <th>Velicina posebnog dela</th>
+                    <th>Merna jedinica</th>
+                    <th>Kontakt vlasnika</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let v of sednica.vlasnici">
+                    <td>{{v.vlasnikId}}</td>
+                    <td>{{v.ime}}</td>
+                    <td>{{v.prezime}}</td>
+                    <td>{{v.brojPosebnogDela}}</td>
+                    <td>{{v.velicinaPosebnogDela}}</td>
+                    <td>{{v.mernaJedinica}}</td>
+                    <td>{{v.kontaktVlasnika}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<br>
+<br>
+<button (click)="list()" class="btn btn-primary">Nazad na sve sednice</button><br>

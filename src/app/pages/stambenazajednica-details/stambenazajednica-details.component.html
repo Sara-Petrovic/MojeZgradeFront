@@ -1,0 +1,63 @@
+<h2>Detaljni podaci o stambenoj zajednici</h2>
+
+<hr />
+<form #stambenaZajednicaform="ngForm" id="update-form" (ngSubmit)="updateStambenaZajednica()">
+    <div *ngIf="stambenaZajednica">
+        <div>
+            <label><b>Stambena zajednica ID: </b></label>
+            <div class="form-control" style="background-color: lightgrey;">{{stambenaZajednica.stambenaZajednicaId}}
+            </div>
+        </div>
+        <div>
+            <label><b>Ulica: </b></label>
+            <input type="text" class="form-control" name="ulica" [(ngModel)]="stambenaZajednica.ulica">
+        </div>
+        <div>
+            <label><b>Broj: </b></label>
+            <input type="text" class="form-control" name="broj" [(ngModel)]="stambenaZajednica.broj">
+        </div>
+        <div id="mesto-div">
+            <div class="form-group">
+                <label for="mesto"><b>Promenite mesto: </b></label>
+                <select class="form-control" name="selectMesto" [(ngModel)]="selectedMesto" (change)="selectMesto()">
+                    <option *ngFor="let m of mesto" [value]="m" [ngValue]="m" id="{{m.mestoId}}"> {{m.naziv}}</option>
+                </select>
+            </div>
+            <label><b>Naziv: </b></label> <input class="form-control" name="mesto.naziv" readonly
+                style="background-color: lightgrey;" [(ngModel)]="stambenaZajednica.mesto.naziv">
+            <label><b>Ptt: </b></label> <input class="form-control" name="mesto.ptt" readonly
+                style="background-color: lightgrey;" [(ngModel)]="stambenaZajednica.mesto.ptt">
+        </div>
+        <div>
+            <label><b>PIB: </b></label>
+            <input type="text" name="pib" class="form-control" [(ngModel)]="stambenaZajednica.pib">
+        </div>
+        <div>
+            <label><b>Maticni broj: </b></label>
+            <input type="text" name="maticniBroj" class="form-control" [(ngModel)]="stambenaZajednica.maticniBroj">
+        </div>
+        <div>
+            <label><b>Banka: </b></label>
+            <input type="text" name="banka" class="form-control" [(ngModel)]="stambenaZajednica.banka">
+        </div>
+        <div>
+            <label><b>Tekući račun: </b></label>
+            <input type="text" name="tekuciRacun" class="form-control" [(ngModel)]="stambenaZajednica.tekuciRacun">
+        </div>
+        <div id="vlasnici" *ngIf="vlasnici"><label><b>Vlasnici: </b></label>
+            <div id="lista-vlasnika">
+            <div class="input-group" *ngFor="let vlasnik of vlasnici">
+                <label class="col-md-2" style="margin-top: 1em; margin-left: 1em;"><b>Vlasnik: </b></label>
+                <div class="form-control col-md-6" style="margin: 1em; background-color: lightgrey;">{{vlasnik.ime}} {{vlasnik.prezime}}</div>
+                <label class="col-md-2" style="margin-top: 1em; margin-left: 1em;"><b>Kontakt: </b></label>
+                <div class="form-control col-md-6" style="margin: 1em; background-color: lightgrey;">{{vlasnik.kontaktVlasnika}}</div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-info col-md-1" style="margin-top: 1em;">Update</button>
+</form>
+
+<button (click)="list()" class="btn btn-primary col-md-3" style="margin-left: 3em; margin-bottom: 2em;">Nazad na listu
+    stambenih zajednica</button>

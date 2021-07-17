@@ -1,0 +1,51 @@
+<div class="container">
+    <h2 style="margin-top: 0.5em;">Moje zgrade</h2>
+    <form #stambenaZajednicaform="ngForm" (ngSubmit)="saveStambenaZajednica()">
+        <small class="text-danger">{{msg}}</small>
+
+        <div class="form-group">
+            <label for="ulica">Ulica:</label>
+            <input type="text" class="form-control" placeholder="Unesite ulicu:" name="ulica"
+                [(ngModel)]="sZajednica.ulica">
+        </div>
+
+        <div class="form-group">
+            <label for="broj">Broj:</label>
+            <input type="text" class="form-control" placeholder="Unesite broj" name="broj"
+                [(ngModel)]="sZajednica.broj">
+        </div>
+
+        <div class="form-group">
+            <label for="mesto">Mesto:</label>
+            <select [(ngModel)]="selectedMesto" (change)="selected()" class="form-control" name="mesto" >
+                <option *ngFor="let m of mesto" [value]="m" [ngValue]="m" id="{{m.mestoId}}"> {{m.naziv}}</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="tekucirRacun">Tekuci racun:</label>
+            <input type="text" class="form-control" placeholder="Unesite tekuci racun" name="tekuciRacun"
+                [(ngModel)]="sZajednica.tekuciRacun">
+        </div>
+
+        <div class="form-group">
+            <label for="banka">Banka:</label>
+            <input type="text" class="form-control" placeholder="Unesite banku" name="banka"
+                [(ngModel)]="sZajednica.banka">
+        </div>
+
+        <div class="form-group">
+            <label for="pib">PIB:</label>
+            <input type="text" class="form-control" placeholder="Unesite pib" name="pib" [(ngModel)]="sZajednica.pib">
+        </div>
+
+        <div class="form-group">
+            <label for="maticniBroj">Maticni broj:</label>
+            <input type="text" class="form-control" placeholder="Unesite maticni broj:" name="maticniBroj"
+                [(ngModel)]="sZajednica.maticniBroj">
+        </div>
+
+
+        <button type="submit" class="btn btn-info">Save</button>
+    </form>
+</div>

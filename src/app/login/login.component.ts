@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
       data => {
         console.log("response received");
         localStorage.setItem("loggedUser", JSON.stringify(data));
-        this._router.navigate(['/loginsuccess']);
+        this._router.navigate(['/moje-zgrade/home']);
       },
       error => {
         console.log("exception occured");
