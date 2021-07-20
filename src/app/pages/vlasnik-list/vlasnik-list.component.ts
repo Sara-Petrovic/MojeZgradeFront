@@ -46,10 +46,10 @@ export class VlasnikListComponent implements OnInit {
   }
 
   vlasnikDetails(id: number) {
-    this.router.navigate(['detailsvlasnik', id]);
+    this.router.navigate(['moje-zgrade/detailsvlasnik', id]);
   }
   vlasnikUpdate(id: number) {
-    this.router.navigate(['updatevlasnik', id]);
+    this.router.navigate(['moje-zgrade/updatevlasnik', id]);
   }
   findVlasnikByPrezime() {
     if (this.prezime == "") {

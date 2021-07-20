@@ -92,7 +92,7 @@ export class SednicaCreateComponent implements OnInit {
     this._serviceSS.saveSednicaSkupstineFromRemote(this.sednica).subscribe(
       data => {
         console.log("saved sednica");
-        this._router.navigate(['/sednice'])
+        this._router.navigate(['moje-zgrade/sednice'])
       },
       error => {
         console.log("exception occured");

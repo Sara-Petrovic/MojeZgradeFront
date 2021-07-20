@@ -33,7 +33,7 @@ export class VlasnikDetailsComponent implements OnInit {
   }
 
   list() {
-    this.router.navigate(['vlasnici']);
+    this.router.navigate(['moje-zgrade/vlasnici']);
   }
 
 }

@@ -28,11 +28,11 @@ export class RacunDetailsComponent implements OnInit {
   }
 
   list() {
-    this.router.navigate(['racuni']);
+    this.router.navigate(['moje-zgrade/racuni']);
   }
 
   home() {
-    this.router.navigate(['loginsuccess']);
+    this.router.navigate(['moje-zgrade/home']);
   }
 
   updateRacun(){

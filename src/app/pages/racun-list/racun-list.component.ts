@@ -84,6 +84,6 @@ export class RacunListComponent implements OnInit {
   }
 
   racunDetails(id: number) {
-    this.router.navigate(['detailsracun', id]);
+    this.router.navigate(['moje-zgrade/detailsracun', id]);
   }
 }

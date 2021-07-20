@@ -71,7 +71,7 @@ export class VlasnikComponent implements OnInit {
     this._service.saveVlasnikPosebnogDelaFromRemote(this.vlasnik).subscribe(
       data => {
         console.log("saved vlasnik");
-        this._router.navigate(['/vlasnici'])
+        this._router.navigate(['moje-zgrade/vlasnici'])
       },
       error => {
         console.log("exception occured");

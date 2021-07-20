@@ -51,7 +51,7 @@ export class StambenazajednicaComponent implements OnInit {
     console.log(this.sZajednica);
     this._service.saveStambenaZajednicaFromRemote(this.sZajednica).subscribe(
       data => {
-        this._router.navigate(['/loginsuccess'])
+        this._router.navigate(['moje-zgrade/home'])
       },
       error => {
         console.log(error);
@@ -62,6 +62,6 @@ export class StambenazajednicaComponent implements OnInit {
   }
 
   home() {
-    this._router.navigate(['loginsuccess']);
+    this._router.navigate(['moje-zgrade/home']);
   }
 }

@@ -37,7 +37,7 @@ export class SednicaListComponent implements OnInit {
   }
 
   sednicaDetails(id: number) {
-    this.router.navigate(['detailssednica', id]);
+    this.router.navigate(['moje-zgrade/detailssednica', id]);
   }
   findSednicaByUlica(){
     if (this.ulica == "") {

@@ -89,6 +89,6 @@ export class VlasnikUpdateComponent implements OnInit {
   }
 
   gotoList() {
-    this.router.navigate(['/vlasnici']);
+    this.router.navigate(['moje-zgrade/vlasnici']);
   }
 }

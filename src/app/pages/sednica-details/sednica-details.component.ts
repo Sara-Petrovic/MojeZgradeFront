@@ -12,8 +12,8 @@ import { SednicaSkupstineService } from 'src/app/services/sednica-skupstine.serv
 })
 export class SednicaDetailsComponent implements OnInit {
 
-  sednicaId: number;
-  sednica: SednicaSkupstine;
+  sednicaId!: number;
+  sednica!: SednicaSkupstine;
 
   constructor(private route: ActivatedRoute, private router: Router,
     private sednicaService: SednicaSkupstineService) { }
@@ -34,7 +34,7 @@ export class SednicaDetailsComponent implements OnInit {
   }
 
   list() {
-    this.router.navigate(['sednice']);
+    this.router.navigate(['moje-zgrade/sednice']);
   }
 
 }

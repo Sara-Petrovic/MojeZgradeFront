@@ -89,7 +89,7 @@ export class RacunComponent implements OnInit {
     this.racunService.saveRacunFromRemote(this.racun).subscribe(
       data => {
         console.log(data);
-        this.router.navigate(['/loginsuccess'])
+        this.router.navigate(['moje-zgrade/home'])
       },
       error => {
         console.log(error);
@@ -108,7 +108,7 @@ export class RacunComponent implements OnInit {
   }
 
   home() {
-    this.router.navigate(['loginsuccess']);
+    this.router.navigate(['moje-zgrade/home']);
   }
 
 }

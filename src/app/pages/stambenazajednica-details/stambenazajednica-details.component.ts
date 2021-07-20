@@ -64,11 +64,11 @@ export class StambenazajednicaDetailsComponent implements OnInit {
   }
 
   list() {
-    this.router.navigate(['stambene-zajednice']);
+    this.router.navigate(['moje-zgrade/stambene-zajednice']);
   }
 
   home() {
-    this.router.navigate(['loginsuccess']);
+    this.router.navigate(['moje-zgrade/home']);
   }
 
   selectMesto() {

@@ -64,10 +64,10 @@ export class StambenazajednicaListComponent implements OnInit {
   }
 
   stambenaZajednicaDetails(id: number) {
-    this.router.navigate(['detailsstambenazajednica', id]);
+    this.router.navigate(['moje-zgrade/detailsstambenazajednica', id]);
   }
   stambenaZajednicaUpdate(id: number) {
-    this.router.navigate(['detailsstambenazajednica', id]);
+    this.router.navigate(['moje-zgrade/detailsstambenazajednica', id]);
   }
 
   findStambenaZajednicaByPibFromRemote() {
@@ -121,7 +121,7 @@ export class StambenazajednicaListComponent implements OnInit {
   }
 
   home() {
-    this.router.navigate(['loginsuccess']);
+    this.router.navigate(['moje-zgrade/home']);
   }
 
 }
