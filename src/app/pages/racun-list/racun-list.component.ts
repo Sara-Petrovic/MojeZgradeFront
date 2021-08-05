@@ -13,6 +13,9 @@ import { VlasnikPosebnogDelaService } from 'src/app/services/vlasnik-posebnog-de
   styleUrls: ['./racun-list.component.css']
 })
 export class RacunListComponent implements OnInit {
+
+  sviStatusi!: String[];
+
   vlasnici!: VlasnikPosebnogDela[];
   selectedVlasnik!: VlasnikPosebnogDela;
 
@@ -30,6 +33,9 @@ export class RacunListComponent implements OnInit {
     this.show = new Array<boolean>(3);
     this.show[0] = true;
     this.show[1] = false;
+
+    this.racunService.getAllRacunStatus()
+    .subscribe(sviStatusi => { this.sviStatusi = sviStatusi; console.log(sviStatusi) });
 
     let user = localStorage.getItem("loggedUser");
     if (user == null || user == "") {

@@ -12,8 +12,8 @@
             <div class="input-group col-md-6" id="search-by-status" style="text-align: center" *ngIf="show[0]">
                 <label for="status">Status:</label>
                 <select [(ngModel)]="status" class="form-control" name="status">
-                    <option value="NEPLACEN"> Neplaćen</option>
-                    <option value="PLACEN"> Plaćen</option>
+                    <option *ngFor="let s of sviStatusi" [value]="s" [ngValue]="s" id="s">
+                        {{s}}</option>
                 </select>
                 <span class="input-group-btn">
                     <button class="btn btn-danger" type="button" (click)="findRacunByStatusFromRemote()">

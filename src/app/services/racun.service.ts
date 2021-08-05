@@ -39,4 +39,8 @@ export class RacunService {
   updateRacunFromRemote(id:number, updatedRacun: Racun){
     return this._http.put<any>("http://localhost:8090/racun/"+ id, updatedRacun);
   }
+
+  getAllRacunStatus(){
+    return this._http.get<any>("http://localhost:8090/racun/all/status");
+  }
 }
