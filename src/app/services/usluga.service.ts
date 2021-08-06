@@ -15,4 +15,8 @@ export class UslugaService {
     return this._http.get<Usluga>(GlobalVariable.BASE_API_URL + "usluga");
   }
 
+  saveUslugaFromRemote(usluga:Usluga){
+    return this._http.post<Usluga>(GlobalVariable.BASE_API_URL + "usluga", usluga);
+  }
+
 }

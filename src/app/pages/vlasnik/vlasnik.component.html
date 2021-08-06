@@ -36,7 +36,6 @@
         <div class="form-group">
             <label for="mernaJedinica">Merna jedinica:</label>
             <select [(ngModel)]="selectedJedinicaMere" class="form-control"  (change)="selectedMernaJedinica()" name="sz" >
-               <!-- <option [ngValue]="null">Select one...</option>-->
                 <option  *ngFor="let jm of jediniceMere | keyvalue" [value]="jm.value"  [ngValue]="jm.value">{{jm.value}}</option>
               </select>
         </div>

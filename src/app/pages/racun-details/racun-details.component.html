@@ -25,11 +25,11 @@
             <label for="status">Status:</label>
             <input name="status" readonly type="text" readonly class="form-control col-md-2" style="margin-right: 1em;"
                 [(ngModel)]="racun.status">
-            <button class="btn btn-info" *ngIf="racun.status == 'POSLAT'" (click)="racunIsPaid()">Račun je
+            <button class="btn btn-info" *ngIf="racun.status == 'POSLAT'" (click)="racunIsPaid()" style="margin-top: 0.5em;">Račun je
                 plaćen</button>
-            <button class="btn btn-info" *ngIf="racun.status == 'KREIRAN'" (click)="racunIsSent()">Pošaljite
+            <button class="btn btn-info" *ngIf="racun.status == 'KREIRAN'" (click)="racunIsSent()" style="margin-top: 0.5em;">Pošaljite
                 račun</button>
-            <button class="btn btn-info" *ngIf="racun.status == 'KREIRAN'" (click)="updateRacun()">Ažurirajte
+            <button class="btn btn-info" *ngIf="racun.status == 'KREIRAN'" (click)="updateRacun()" style="margin-top: 0.5em; margin-left: 0.5em;">Ažurirajte
                 račun</button>
         </div>
 
@@ -49,9 +49,9 @@
             <table class="table table-bordered" style="margin-top: 1em;">
                 <thead>
                     <th class="col-md-2" scope="col">Redni broj</th>
-                    <th class="col-md-8" scope="col">Usluga</th>
+                    <th class="col-md-7" scope="col">Usluga</th>
                     <th class="col-md-2" scope="col">Cena</th>
-                    <th class="col-md-2" scope="col">Količina</th>
+                    <th class="col-md-3" scope="col">Količina</th>
                     <th class="col-md-1" *ngIf="racun.status == 'KREIRAN'">Ukloni</th>
                 </thead>
                 <tbody>

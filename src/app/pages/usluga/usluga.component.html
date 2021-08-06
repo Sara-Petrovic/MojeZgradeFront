@@ -1,1 +1,27 @@
-<p>usluga works!</p>
+<div class="container">
+    <h2 style="margin-top: 0.5em;">Moje zgrade</h2>
+    <form #stambenaZajednicaform="ngForm" (ngSubmit)="saveUsluga()">
+        <small class="text-danger">{{msg}}</small>
+
+        <div class="form-group">
+            <label for="naziv">Naziv usluge:</label>
+            <input type="text" class="form-control" placeholder="Unesite naziv usluge:" name="naziv"
+                [(ngModel)]="usluga.naziv">
+        </div>
+
+        <div class="form-group">
+            <label for="cena">Cena:</label>
+            <input type="text" class="form-control" placeholder="Unesite cenu" name="cena"
+                [(ngModel)]="usluga.cena">
+        </div>
+
+        <div class="form-group">
+            <label for="mernaJedinica">Merna jedinica:</label>
+            <select [(ngModel)]="selectedJedinicaMere" class="form-control"  (change)="selectedMernaJedinica()" name="sz" >
+                <option  *ngFor="let jm of jediniceMere | keyvalue" [value]="jm.value"  [ngValue]="jm.value">{{jm.value}}</option>
+              </select>
+        </div>
+
+        <button type="submit" class="btn btn-info" style="margin-top: 0.5em; margin-bottom: 9em;">Save</button>
+    </form>
+</div>
