@@ -25,6 +25,7 @@ import { NavFooterComponent } from './components/footer/nav-footer.component';
 import { DatePipe } from '@angular/common';
 import { HomeComponent } from './pages/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
+import { UslugaComponent } from './pages/usluga/usluga.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { HeaderComponent } from './components/header/header.component';
     RacunDetailsComponent,
     NavFooterComponent,
     HomeComponent,
-    HeaderComponent
+    HeaderComponent,
+    UslugaComponent
   ],
   imports: [
     BrowserModule,
