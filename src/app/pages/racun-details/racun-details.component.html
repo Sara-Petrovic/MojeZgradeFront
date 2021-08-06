@@ -10,8 +10,10 @@
         <div class="form-group">
             <label for="datum">Datum izdavanja:</label>
             <div name="datum" class="input-group">
-                <input name="datumIzdavanja" readonly type="text" class="form-control col-md-2"
+                <input name="datumIzdavanja" *ngIf="racun.status == 'KREIRAN'" type="text" class="form-control col-md-2"
                     style="margin-right: 1em;" [(ngModel)]="racun.datumIzdavanja">
+                <input name="datumIzdavanja" *ngIf="racun.status != 'KREIRAN'" readonly type="text"
+                    class="form-control col-md-2" style="margin-right: 1em;" [(ngModel)]="racun.datumIzdavanja">
             </div>
         </div>
         <div class="form-group">
@@ -23,8 +25,12 @@
             <label for="status">Status:</label>
             <input name="status" readonly type="text" readonly class="form-control col-md-2" style="margin-right: 1em;"
                 [(ngModel)]="racun.status">
-            <button class="btn btn-info" *ngIf="racun.status == 'NEPLACEN'" (click)="updateRacun()">Račun je
+            <button class="btn btn-info" *ngIf="racun.status == 'POSLAT'" (click)="racunIsPaid()">Račun je
                 plaćen</button>
+            <button class="btn btn-info" *ngIf="racun.status == 'KREIRAN'" (click)="racunIsSent()">Pošaljite
+                račun</button>
+            <button class="btn btn-info" *ngIf="racun.status == 'KREIRAN'" (click)="updateRacun()">Ažurirajte
+                račun</button>
         </div>
 
         <div>

@@ -10,7 +10,7 @@ import { RacunService } from 'src/app/services/racun.service';
 })
 export class RacunDetailsComponent implements OnInit {
   racunId!: number;
-  racun!:Racun;
+  racun!: Racun;
 
   constructor(private route: ActivatedRoute,
     private racunService: RacunService,
@@ -21,9 +21,7 @@ export class RacunDetailsComponent implements OnInit {
     this.racunId = this.route.snapshot.params['id'];
     this.racunService.getRacunByIdFromRemote(this.racunId)
       .subscribe(data => {
-        console.log(data)
         this.racun = data;
-
       }, error => console.log(error));
   }
 
@@ -31,15 +29,40 @@ export class RacunDetailsComponent implements OnInit {
     this.router.navigate(['moje-zgrade/racuni']);
   }
 
-  home() {
-    this.router.navigate(['moje-zgrade/home']);
-  }
-
-  updateRacun(){
-    this.racun.status = 'PLACEN';
+  updateRacun() {
+    if (this.racun.status != 'KREIRAN') {
+      alert("Ne mozete da promeniti racun koji ste vec poslalti vlasniku.");
+      return;
+    }
     console.log(this.racunService.updateRacunFromRemote(this.racunId, this.racun).subscribe(
       data => console.log(data)
+      //ovde postavi racun na azurirane podatke
     ));
     alert("Racun je uspešno sačuvan.");
+  }
+
+  racunIsPaid() {
+    if (this.racun.status == 'PLACEN') {
+      alert("Ne mozete da promenite racun koji je vec placen.");
+      return;
+    }
+
+    this.racunService.updateRacunPaidFromRemote(this.racun.racunId).subscribe(
+      data => { console.log(data); this.racun.status = "PLACEN" }
+    );
+
+    alert("Status racuna je azuriran na placen.");
+    // this.router.navigate(['moje-zgrade/racuni']);
+  }
+
+  racunIsSent(){
+    if (this.racun.status != 'KREIRAN') {
+      alert("Ne mozete da posaljete ovaj racun.");
+      return;
+    }
+
+    this.racunService.updateRacunSentFromRemote(this.racun.racunId).subscribe(
+      data => { console.log(data); this.racun.status = "POSLAT" }
+    );
   }
 }

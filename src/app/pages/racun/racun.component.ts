@@ -85,7 +85,7 @@ export class RacunComponent implements OnInit {
     this.racun.upravnik = this.login.user;
     this.racun.stavke = this.stavke;
     this.racun.ukupnaVrednost = this.ukupnaVrednost;
-    console.log(this.racun);
+    this.racun.status = "KREIRAN";
     this.racunService.saveRacunFromRemote(this.racun).subscribe(
       data => {
         console.log(data);

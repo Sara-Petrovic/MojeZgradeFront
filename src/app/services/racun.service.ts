@@ -43,4 +43,12 @@ export class RacunService {
   getAllRacunStatus() {
     return this._http.get<any>(GlobalVariable.BASE_API_URL + "racun/all/status");
   }
+
+  updateRacunPaidFromRemote(id: number){
+    return this._http.put<any>(GlobalVariable.BASE_API_URL + "racun/paid/" + id, null);
+  }
+
+  updateRacunSentFromRemote(id: number){
+    return this._http.put<any>(GlobalVariable.BASE_API_URL + "racun/sent/" + id, null);
+  }
 }
