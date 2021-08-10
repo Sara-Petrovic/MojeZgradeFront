@@ -18,18 +18,18 @@
         </div>
         <div class="form-group">
             <label for="ukupnaVrednost">Ukupna vrednost:</label>
-            <input name="ukupnaVrednost" readonly type="text" readonly class="form-control col-md-2"
-                style="margin-right: 1em;" [(ngModel)]="racun.ukupnaVrednost">
+            <input name="ukupnaVrednost" readonly type="text" class="form-control col-md-2" style="margin-right: 1em;"
+                [(ngModel)]="racun.ukupnaVrednost">
         </div>
         <div class="form-group">
             <label for="status">Status:</label>
-            <input name="status" readonly type="text" readonly class="form-control col-md-2" style="margin-right: 1em;"
+            <input name="status" readonly type="text" class="form-control col-md-2" style="margin-right: 1em;"
                 [(ngModel)]="racun.status">
-            <button class="btn btn-info" *ngIf="racun.status == 'POSLAT'" (click)="racunIsPaid()" style="margin-top: 0.5em;">Račun je
+            <button class="btn btn-info" *ngIf="racun.status == 'POSLAT'" (click)="racunIsPaid()"
+                style="margin-top: 0.5em;">Račun je
                 plaćen</button>
-            <button class="btn btn-info" *ngIf="racun.status == 'KREIRAN'" (click)="racunIsSent()" style="margin-top: 0.5em;">Pošaljite
-                račun</button>
-            <button class="btn btn-info" *ngIf="racun.status == 'KREIRAN'" (click)="updateRacun()" style="margin-top: 0.5em; margin-left: 0.5em;">Ažurirajte
+            <button class="btn btn-info" *ngIf="racun.status == 'KREIRAN'" (click)="updateRacun()"
+                style="margin-top: 0.5em;">Ažurirajte
                 račun</button>
         </div>
 
@@ -45,6 +45,7 @@
                 [(ngModel)]="kolicina">
             <button (click)="addStavka()" class="btn btn-primary col-md-2" style="margin-top: 0.5em;">Add</button>
         </div>
+
         <div>
             <table class="table table-bordered" style="margin-top: 1em;">
                 <thead>
@@ -65,13 +66,22 @@
                             {{stavka.usluga.cena}}</td>
                         <td class="col-md-2" name="fieldName" ngDefaultControl [(ngModel)]="stavka.kolicina">
                             {{stavka.kolicina}}</td>
-                        <td><button (click)="deleteStavka(stavka)" *ngIf="racun.status == 'KREIRAN'" class="btn-delete-stavka" style="margin-top: 0.5em;">—</button></td>
+                        <td><button (click)="deleteStavka(stavka)" *ngIf="racun.status == 'KREIRAN'"
+                                class="btn-delete-stavka" style="margin-top: 0.5em;">—</button></td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
 
-    <button (click)="list()" class="btn btn-primary col-md-3" style="margin-top: 1.5em; margin-left: 0.5em; ">Nazad na
+    <div class="form-group" *ngIf="racun.status == 'KREIRAN'">
+        <label for="email-password">Šifra za e-mail:</label>
+        <input name="email-password" type="password" class="form-control col-md-2" style="margin-right: 1em;"
+            [(ngModel)]="password">
+        <button class="btn btn-info" (click)="sendRacun()" style="margin-top: 0.5em;">Pošaljite
+            račun</button>
+    </div>
+
+    <button (click)="list()" class="btn btn-primary col-md-3" style="margin-top: 1.5em;">Nazad na
         listu svih računa</button>
 </div>

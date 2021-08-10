@@ -17,6 +17,7 @@ import { VlasnikUpdateComponent } from './pages/vlasnik-update/vlasnik-update.co
 import { VlasnikComponent } from './pages/vlasnik/vlasnik.component';
 import { HomeComponent } from './pages/home/home.component';
 import { UslugaComponent } from './pages/usluga/usluga.component';
+import { RacunSendComponent } from './pages/racun-send/racun-send.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -39,7 +40,8 @@ const routes: Routes = [
       { path: 'sednicaskupstine', component: SednicaCreateComponent },
       { path: 'sednice', component: SednicaListComponent },
       { path: 'updatevlasnik/:id', component: VlasnikUpdateComponent },
-      { path: 'usluga', component: UslugaComponent }
+      { path: 'usluga', component: UslugaComponent },
+      {path: 'send-racun/:id', component: RacunSendComponent}
     ]
   }
 ];

@@ -21,10 +21,13 @@ export class RacunDetailsComponent implements OnInit {
   kolicina: number;
   ukupnaVrednost: number;
 
+  password = "";
+
   constructor(private route: ActivatedRoute,
     private racunService: RacunService,
     private uslugeService: UslugaService,
     private router: Router) {
+      
     this.kolicina = 1;
     this.ukupnaVrednost = 0;
 
@@ -74,15 +77,19 @@ export class RacunDetailsComponent implements OnInit {
     alert("Status racuna je azuriran na placen.");
   }
 
-  racunIsSent() {
-    if (this.racun.status != 'KREIRAN') {
-      alert("Ne mozete da posaljete ovaj racun.");
-      return;
-    }
+  // sendRacun() {
+  //   if (this.racun.status != 'KREIRAN') {
+  //     alert("Ne mozete da posaljete ovaj racun.");
+  //     return;
+  //   }
 
-    this.racunService.updateRacunSentFromRemote(this.racun.racunId).subscribe(
-      data => { console.log(data); this.racun.status = "POSLAT" }
-    );
+  //   this.racunService.updateRacunSentFromRemote(this.racun.racunId, this.password).subscribe(
+  //     data => { console.log(data); this.racun.status = "POSLAT" }
+  //   );
+  // }
+
+  sendRacun(){
+    this.router.navigate(['moje-zgrade/send-racun/' + this.racunId]);
   }
 
   addStavka() {

@@ -26,6 +26,7 @@ import { DatePipe } from '@angular/common';
 import { HomeComponent } from './pages/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import { UslugaComponent } from './pages/usluga/usluga.component';
+import { RacunSendComponent } from './pages/racun-send/racun-send.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { UslugaComponent } from './pages/usluga/usluga.component';
     NavFooterComponent,
     HomeComponent,
     HeaderComponent,
-    UslugaComponent
+    UslugaComponent,
+    RacunSendComponent
   ],
   imports: [
     BrowserModule,
