@@ -1,12 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import html2canvas from 'html2canvas';
-
-
 import { Racun } from 'src/app/model/racun';
 import { RacunService } from 'src/app/services/racun.service';
-import jsPDF from 'jspdf';
-
 
 @Component({
   selector: 'app-racun-send',
@@ -54,40 +49,7 @@ export class RacunSendComponent implements OnInit {
       return;
     }
 
-    // pdf.addHTML(this.nalogZaUplatu.nativeElement, () => {
-    //   pdf.save('test.pdf');
-    // });
-
-    // const pdf = new jsPDF('p', 'mm', 'a4');
-
-    // html2canvas(this.nalogZaUplatu.nativeElement).then(canvas => {
-
-    //   let docWidth = 208;
-    //   let docHeight = canvas.height * docWidth / canvas.width;
-
-    //   const contentDataURL = canvas.toDataURL('image/png');
-    //   let position = 0;
-    //   pdf.addImage(contentDataURL, 'PNG', 0, position, docWidth, docHeight)
-
-    //   // pdf.save('generated_files/uplatnica' + this.racun.datumIzdavanja +'.pdf');
-
-    // });
-
-
-
-    // const uplatnica = new jsPDF();
-
-    // const nalog = this.nalogZaUplatu.nativeElement;
-
-    // let html = htmlToPdfmake(nalog.innerHTML);
-
-
-    // const document = {content: html};
-    // pdfMake.createPdf(document).open();
-
-    // let file:File = pdf.output('blob');
-
-    this.racunService.updateRacunSentFromRemote(this.racun.racunId, this.password).subscribe(
+    this.racunService.updateRacunSentFromRemote(this.racun.racunId, this.racun, this.password).subscribe(
       data => { console.log(data); this.racun.status = "POSLAT" }
     );
 

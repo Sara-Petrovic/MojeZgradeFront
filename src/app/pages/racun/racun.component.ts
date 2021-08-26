@@ -82,7 +82,6 @@ export class RacunComponent implements OnInit {
   }
 
   saveRacun() {
-    this.racun.upravnik = this.login.user;
     this.racun.stavke = this.stavke;
     this.racun.ukupnaVrednost = this.ukupnaVrednost;
     this.racun.status = "KREIRAN";

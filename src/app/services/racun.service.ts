@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { GlobalVariable } from '../components/global/globalVariable';
+import { EmailRacun } from '../model/email-racun';
 import { Login } from '../model/login';
 import { Racun } from '../model/racun';
 import { VlasnikPosebnogDela } from '../model/vlasnik-posebnog-dela';
@@ -48,32 +49,7 @@ export class RacunService {
     return this._http.put<any>(GlobalVariable.BASE_API_URL + "racun/paid/" + id, null);
   }
 
-  updateRacunSentFromRemote(id: number, emailPassword: string) {
-
-    // console.log(uplatnica)
-
-    // let fd: FormData = new FormData();
-    // fd.append('emailPassword', password);
-    // fd.append('uplatnica', uplatnica, 'uplatnica.pdf');
-
-    // let headers = new HttpHeaders();
-    // headers.append('Content-Type', 'multipart/form-data');
-    // headers.append('Accept', 'application/json');
-
-    // uplatnica.open;
-
-
-    return this._http.post<any>(GlobalVariable.BASE_API_URL + "racun/" + id + "/send", emailPassword);
+  updateRacunSentFromRemote(id: number, racun:Racun, emailPassword: string) {
+    return this._http.post<any>(GlobalVariable.BASE_API_URL + "racun/" + id + "/send", new EmailRacun(racun, emailPassword));
   }
 }
-/*
-        
-        this.http.post(`${this.apiEndPoint}`, formData, options)
-            .map(res => res.json())
-            .catch(error => Observable.throw(error))
-            .subscribe(
-                data => console.log('success'),
-                error => console.log(error)
-            )
-
-*/
