@@ -24,31 +24,30 @@ racun za {{mesec}}</textarea><br>
             <div style="display:flex">
                 <div>
                     <label for="sifra">Šifra plaćanja:</label><br>
-                    <input id="sifra" class="sifra" name="sifra" list="sifre" value="189">
+                    <input id="sifra" class="sifra" name="sifra" list="sifre" [(ngModel)]="sifraPlacanja">
                 </div>
 
                 <div style="margin-left: 0.5em;">
                     <label for="valuta">Valuta:</label><br>
-                    <input class="valuta" type="text" name="valuta" maxlength="3" value="RSD">
+                    <input class="valuta" type="text" name="valuta" [(ngModel)]="valuta">
                 </div>
 
                 <div style="margin-left: 0.5em;">
                     <label for="iznos">Iznos:</label><br>
                     <input id="iznos" type="number" name="iznos" pattern="^[0-9]*\.[0-9]{2}$"
-                        [(ngModel)]="racun.ukupnaVrednost">
+                        [(ngModel)]="iznos">
                 </div>
             </div>
 
             <br>
             <label for="racun">Račun:</label><br>
-            <input type="text" name="racun" maxlength="20" style="width: 100%;"
-                [(ngModel)]="racun.vlasnikPosebnogDela.stambenaZajednica.tekuciRacun"
-                placeholder="123-1234567890123-12">
+            <input type="text" name="racun" style="width: 100%;"
+                [(ngModel)]="tekuciRacun">
             <br><br><br>
             <label for="model-i-poziv">Model i poziv na broj:</label>
             <div name="model-i-poziv">
-                <input class="model" type="text" name="model" maxlength="10" style="margin-right: 0.5em;">
-                <input type="text" name="poziv" maxlength="20" [(ngModel)]="racun.vlasnikPosebnogDela.brojPosebnogDela">
+                <input class="model" type="text" name="model" style="margin-right: 0.5em;" [(ngModel)]="model">
+                <input type="text" name="poziv" [(ngModel)]="pozivNaBroj">
             </div>
 
         </div>

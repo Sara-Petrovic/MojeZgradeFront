@@ -49,7 +49,7 @@ export class RacunService {
     return this._http.put<any>(GlobalVariable.BASE_API_URL + "racun/paid/" + id, null);
   }
 
-  updateRacunSentFromRemote(id: number, racun:Racun, emailPassword: string) {
-    return this._http.post<any>(GlobalVariable.BASE_API_URL + "racun/" + id + "/send", new EmailRacun(racun, emailPassword));
+  updateRacunSentFromRemote(id: number, emailRacun:EmailRacun) {
+    return this._http.post<any>(GlobalVariable.BASE_API_URL + "racun/" + id + "/send", emailRacun);
   }
 }

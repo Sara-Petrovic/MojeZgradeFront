@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { EmailRacun } from 'src/app/model/email-racun';
 import { Racun } from 'src/app/model/racun';
 import { RacunService } from 'src/app/services/racun.service';
 
@@ -13,7 +14,15 @@ export class RacunSendComponent implements OnInit {
   @ViewChild('nalog_za_uplatu') nalogZaUplatu!: ElementRef;
 
   racun: Racun;
-  mesec!: String;
+  mesec!: string;
+
+  sifraPlacanja!:string;
+  valuta!:string;
+  iznos!:string;
+  tekuciRacun!:string;
+  model!:string;
+  pozivNaBroj!:string;
+
 
   password = "";
 
@@ -31,6 +40,12 @@ export class RacunSendComponent implements OnInit {
     this.racunService.getRacunByIdFromRemote(racunId)
       .subscribe(data => {
         this.racun = data;
+        this.sifraPlacanja = '189';
+        this.valuta = 'RSD';
+        this.iznos = this.racun.ukupnaVrednost.toString();
+        this.tekuciRacun = this.racun.vlasnikPosebnogDela.stambenaZajednica.tekuciRacun;
+        this.model = '';
+        this.pozivNaBroj = this.racun.vlasnikPosebnogDela.brojPosebnogDela;
       }, error => console.log(error));
 
     let mesec = {
@@ -41,6 +56,8 @@ export class RacunSendComponent implements OnInit {
       this.mesec = mesec;
     }
     this.mesec += " " + this.racun.datumIzdavanja.getUTCFullYear().toString();
+
+   
   }
 
   sendRacun() {
@@ -49,8 +66,11 @@ export class RacunSendComponent implements OnInit {
       return;
     }
 
-    this.racunService.updateRacunSentFromRemote(this.racun.racunId, this.racun, this.password).subscribe(
-      data => { console.log(data); this.racun.status = "POSLAT" }
+    this.racunService.updateRacunSentFromRemote(this.racun.racunId, 
+      new EmailRacun(this.racun, this.password, this.sifraPlacanja, this.valuta, this.iznos, this.tekuciRacun, this.model, this.pozivNaBroj))
+      .subscribe(
+      data => { console.log(data); this.racun.status = "POSLAT"; alert("Sistem je uspešno poslao račun.") },
+      error => { console.log(error); alert("Sistem ne može da pošalje račun.")}
     );
 
 
