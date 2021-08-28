@@ -38,7 +38,7 @@ export class StambenazajednicaComponent implements OnInit {
 
   fillComboBoxMesta(): void {
     this._mestoService.getMesta()
-      .subscribe(mesto => { this.mesto = mesto; console.log(mesto) });
+      .subscribe(mesto => { this.mesto = mesto; });
   }
 
   selected() {
@@ -46,19 +46,19 @@ export class StambenazajednicaComponent implements OnInit {
   }
 
   saveStambenaZajednica() {
-    console.log(this.login);
     this.sZajednica.upravnik = this.login.user;
     console.log(this.sZajednica);
-    this._service.saveStambenaZajednicaFromRemote(this.sZajednica).subscribe(
+    this._service.saveStambenaZajednicaFromRemote(this.sZajednica)
+    .subscribe(
       data => {
+        alert("Stambena zajednica je sačuvana");
         this._router.navigate(['moje-zgrade/home'])
       },
       error => {
         console.log(error);
-        this.msg = "Stambena zajednica nije sacuvana.";
+        this.msg = "Sistem ne može da kreira stambenu zajednicu";
       }
     );
-    alert("Stambena zajednica je uspešno sačuvana.");
   }
 
   home() {

@@ -18,7 +18,7 @@ export class UslugaComponent implements OnInit {
 
   msg = '';
 
-  constructor(private router:Router,
+  constructor(private router: Router,
     private uslugaService: UslugaService) {
     this.usluga = new Usluga(0, "", 0, "KOMAD");
   }
@@ -28,11 +28,15 @@ export class UslugaComponent implements OnInit {
 
   saveUsluga() {
     this.uslugaService.saveUslugaFromRemote(this.usluga).subscribe(
-      data => {console.log(data);
-       }
+      data => {
+        alert("Usluga je zapamćena");
+        this.router.navigate(['moje-zgrade/home']);
+      }, error => {
+        console.log(error);
+        this.msg = 'Sistem ne može da kreira uslugu';
+      }
     );
-    alert("Usluga je sacuvana!");
-    this.router.navigate(['moje-zgrade/home']);
+
   }
 
   selectedMernaJedinica() {

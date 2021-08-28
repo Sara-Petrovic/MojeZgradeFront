@@ -87,17 +87,16 @@ export class RacunComponent implements OnInit {
     this.racun.status = "KREIRAN";
     this.racunService.saveRacunFromRemote(this.racun).subscribe(
       data => {
-        console.log(data);
-        this.router.navigate(['moje-zgrade/home'])
+        alert("Račun je sačuvan");
+        this.router.navigate(['moje-zgrade/home']);
       },
       error => {
         console.log(error);
-        this.msg = "Racun nije sacuvan.";
+        this.msg = "Sistem ne može da kreira račun";
       }
     );
     this.brojStavki = 0;
     this.ukupnaVrednost = 0;
-    alert("Račun je uspešno sačuvan");
   }
 
   isNumber(value: string | number): boolean {

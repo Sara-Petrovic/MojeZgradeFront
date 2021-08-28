@@ -46,7 +46,10 @@ export class RacunSendComponent implements OnInit {
         this.tekuciRacun = this.racun.vlasnikPosebnogDela.stambenaZajednica.tekuciRacun;
         this.model = '';
         this.pozivNaBroj = this.racun.vlasnikPosebnogDela.brojPosebnogDela;
-      }, error => console.log(error));
+      }, error => {
+        console.log(error);
+        alert('Sistem ne može da nađe račun po zadatoj vrednosti');
+      });
 
     let mesec = {
       0: "januar", 1: "februar", 2: "mart", 3: "april", 4: "maj",
@@ -62,15 +65,19 @@ export class RacunSendComponent implements OnInit {
 
   sendRacun() {
     if (this.racun.status != 'KREIRAN') {
-      alert("Ne mozete da posaljete ovaj racun.");
+      alert("Ne mozete da posaljete ovaj racun");
       return;
     }
 
     this.racunService.updateRacunSentFromRemote(this.racun.racunId, 
       new EmailRacun(this.racun, this.password, this.sifraPlacanja, this.valuta, this.iznos, this.tekuciRacun, this.model, this.pozivNaBroj))
       .subscribe(
-      data => { console.log(data); this.racun.status = "POSLAT"; alert("Sistem je uspešno poslao račun.") },
-      error => { console.log(error); alert("Sistem ne može da pošalje račun.")}
+      data => { 
+        this.racun.status = "POSLAT"; 
+        alert("Račun je poslat vlasniku") },
+      error => { 
+        console.log(error); 
+        alert("Sistem ne može da pošalje račun")}
     );
 
 

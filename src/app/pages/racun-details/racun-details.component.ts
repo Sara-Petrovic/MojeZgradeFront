@@ -37,7 +37,11 @@ export class RacunDetailsComponent implements OnInit {
     this.racunService.getRacunByIdFromRemote(this.racunId)
       .subscribe(data => {
         this.racun = data;
-      }, error => console.log(error));
+      }, error => {
+        console.log(error);
+        this.router.navigate(['moje-zgrade/racuni']); 
+        alert('Sistem ne može da nađe račun po zadatoj vrednosti');    
+      });
       this.fillComboBoxUsluge();
   }
 
@@ -56,10 +60,15 @@ export class RacunDetailsComponent implements OnInit {
       return;
     }
     console.log(this.racunService.updateRacunFromRemote(this.racunId, this.racun).subscribe(
-      data => console.log(data)
-      //ovde postavi racun na azurirane podatke
+      data => {
+        alert('Račun je izmenjen');
+        this.router.navigate(['moje-zgrade/racuni']);
+      },
+      error => {
+        console.log(error);
+        alert('Sistem ne može da zapamti račun');
+      }
     ));
-    alert("Racun je uspešno sačuvan.");
   }
 
   racunIsPaid() {
