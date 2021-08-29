@@ -1,4 +1,5 @@
 import { JedinicaMere } from "./jedinica-mere";
+import { SednicaSkupstine } from "./sednica-skupstine";
 import { StambenaZajednica } from "./stambena-zajednica";
 
 export class VlasnikPosebnogDela {

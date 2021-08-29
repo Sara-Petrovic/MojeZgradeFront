@@ -12,7 +12,9 @@ export class SednicaSkupstineService {
 
   saveSednicaSkupstineFromRemote(sednica:SednicaSkupstine){
     return this._http.post<any>("http://localhost:8090/sednicaskupstine", sednica);
-
+  }
+  updateSednicaSkupstineFromRemote(sednicaId:number,sednica:SednicaSkupstine){
+    return this._http.put<any>("http://localhost:8090/sednicaskupstine/"+ sednicaId, sednica);
   }
   getAllSedniceSkupstine(login:Login){
     return this._http.get<any>("http://localhost:8090/sednice/user/"+ login.user.userId + "/" + login.token);

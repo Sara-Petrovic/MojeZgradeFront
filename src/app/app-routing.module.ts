@@ -16,6 +16,7 @@ import { VlasnikListComponent } from './pages/vlasnik-list/vlasnik-list.componen
 import { VlasnikUpdateComponent } from './pages/vlasnik-update/vlasnik-update.component';
 import { VlasnikComponent } from './pages/vlasnik/vlasnik.component';
 import { HomeComponent } from './pages/home/home.component';
+import { SednicaUpdateComponent } from './pages/sednica-update/sednica-update.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -26,6 +27,7 @@ const routes: Routes = [
       { path: 'home', component: HomeComponent },
       { path: 'stambenazajednica', component: StambenazajednicaComponent },
       { path: 'vlasnikposebnogdela', component: VlasnikComponent },
+      { path: 'vlasnikposebnogdela/:id', component: VlasnikListComponent },
       { path: 'vlasnici', component: VlasnikListComponent },
       { path: 'stambene-zajednice', component: StambenazajednicaListComponent },
       // { path: 'loginsuccess/stambenazajednica', redirectTo: '/stambenazajednica', pathMatch: 'full' },
@@ -43,6 +45,7 @@ const routes: Routes = [
       // { path: 'loginsuccess/sednicaskupstine', redirectTo: '/sednicaskupstine', pathMatch: 'full' },
       // { path: 'loginsuccess/sednice', redirectTo: '/sednice', pathMatch: 'full' },
       { path: 'detailssednica/:id', component: SednicaDetailsComponent },
+      { path: 'updatesednica/:id', component: SednicaUpdateComponent },
       { path: 'sednicaskupstine', component: SednicaCreateComponent },
       { path: 'sednice', component: SednicaListComponent },
       { path: 'updatevlasnik/:id', component: VlasnikUpdateComponent }
