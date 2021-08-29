@@ -13,6 +13,9 @@ import { VlasnikPosebnogDelaService } from 'src/app/services/vlasnik-posebnog-de
   styleUrls: ['./racun-list.component.css']
 })
 export class RacunListComponent implements OnInit {
+
+  sviStatusi!: String[];
+
   vlasnici!: VlasnikPosebnogDela[];
   selectedVlasnik!: VlasnikPosebnogDela;
 
@@ -24,12 +27,17 @@ export class RacunListComponent implements OnInit {
 
   login: Login;
 
+  msg = '';
+
   constructor(private racunService: RacunService,
     private router: Router,
     private vlasnikService: VlasnikPosebnogDelaService) {
     this.show = new Array<boolean>(3);
     this.show[0] = true;
     this.show[1] = false;
+
+    this.racunService.getAllRacunStatus()
+      .subscribe(sviStatusi => { this.sviStatusi = sviStatusi; console.log(sviStatusi) });
 
     let user = localStorage.getItem("loggedUser");
     if (user == null || user == "") {
@@ -50,13 +58,23 @@ export class RacunListComponent implements OnInit {
     this.vlasnikService.getAllVlasnikPosebnogDelaFromRemote(this.login)
       .subscribe(vlasnici => { this.vlasnici = vlasnici; console.log(vlasnici) });
   }
-  
+
   home() {
     this.router.navigate(['loginsuccess']);
   }
 
   reloadData() {
     this.racuni = this.racunService.getAllRacunFromRemote(this.login);
+    this.racuni.subscribe(
+      data => {
+        if (data.length == 0)
+          this.msg = 'Sistem ne može da nađe račun po zadatoj vrednosti';
+        else
+          this.msg = '';
+      },
+      error => {
+        console.log('error');
+      })
   }
 
   findRacunByStatusFromRemote() {
@@ -64,6 +82,16 @@ export class RacunListComponent implements OnInit {
       this.racuni = this.racunService.getAllRacunFromRemote(this.login);
     } else {
       this.racuni = this.racunService.findRacunByStatusFromRemote(this.login, this.status);
+      this.racuni.subscribe(
+        data => {
+          if (data.length == 0)
+            this.msg = 'Sistem ne može da nađe račun po zadatoj vrednosti';
+          else
+            this.msg = '';
+        },
+        error => {
+          console.log('error');
+        })
     }
   }
 
@@ -81,6 +109,16 @@ export class RacunListComponent implements OnInit {
 
   findRacunByVlasnikFromRemote() {
     this.racuni = this.racunService.findRacunByVlasnikFromRemote(this.login, this.selectedVlasnik);
+    this.racuni.subscribe(
+      data => {
+        if (data.length == 0)
+          this.msg = 'Sistem ne može da nađe račun po zadatoj vrednosti';
+        else
+          this.msg = '';
+      },
+      error => {
+        console.log('error');
+      })
   }
 
   racunDetails(id: number) {

@@ -4,4 +4,17 @@ input:invalid {
 
 button{
   margin-top: 1em;
+  font-size: 15pt;
+}
+
+label{
+  font-size: 15pt;
+}
+
+input{
+  font-size: 15pt;
+}
+
+select{
+  font-size: 15pt;
 }

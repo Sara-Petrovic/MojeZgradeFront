@@ -10,30 +10,50 @@
         <div class="form-group">
             <label for="datum">Datum izdavanja:</label>
             <div name="datum" class="input-group">
-                <input name="datumIzdavanja" readonly type="text" class="form-control col-md-2"
+                <input name="datumIzdavanja" *ngIf="racun.status == 'KREIRAN'" type="text" class="form-control col-md-2"
                     style="margin-right: 1em;" [(ngModel)]="racun.datumIzdavanja">
+                <input name="datumIzdavanja" *ngIf="racun.status != 'KREIRAN'" readonly type="text"
+                    class="form-control col-md-2" style="margin-right: 1em;" [(ngModel)]="racun.datumIzdavanja">
             </div>
         </div>
         <div class="form-group">
             <label for="ukupnaVrednost">Ukupna vrednost:</label>
-            <input name="ukupnaVrednost" readonly type="text" readonly class="form-control col-md-2"
-                style="margin-right: 1em;" [(ngModel)]="racun.ukupnaVrednost">
+            <input name="ukupnaVrednost" readonly type="text" class="form-control col-md-2" style="margin-right: 1em;"
+                [(ngModel)]="racun.ukupnaVrednost">
         </div>
         <div class="form-group">
             <label for="status">Status:</label>
-            <input name="status" readonly type="text" readonly class="form-control col-md-2" style="margin-right: 1em;"
+            <input name="status" readonly type="text" class="form-control col-md-2" style="margin-right: 1em;"
                 [(ngModel)]="racun.status">
-            <button class="btn btn-info" *ngIf="racun.status == 'NEPLACEN'" (click)="updateRacun()">Račun je
+            <button class="btn btn-info" *ngIf="racun.status == 'POSLAT'" (click)="racunIsPaid()"
+                style="margin-top: 0.5em;">Račun je
                 plaćen</button>
+            <button class="btn btn-info" *ngIf="racun.status == 'KREIRAN'" (click)="updateRacun()"
+                style="margin-top: 0.5em;">Ažurirajte
+                račun</button>
+        </div>
+
+        <div *ngIf="racun.status == 'KREIRAN'" class="input-group" style="margin-top: 1.5em;">
+            <label for="status" style="margin-right: 0.5em;">Usluga:</label>
+            <select class="form-control col-md-4" name="selectedUsluga" [(ngModel)]="selectedUsluga">
+                <option *ngFor="let usluga of sveUsluge" [value]="usluga" [ngValue]="usluga"
+                    id="usluga{{usluga.uslugaId}}">
+                    {{usluga.naziv}}</option>
+            </select>
+            <label for="kolicina" style="margin-left: 2em; margin-right: 0.5em;">Količina: </label>
+            <input name="kolicina" type="text" class="form-control col-md-2" style="margin-right: 2em;"
+                [(ngModel)]="kolicina">
+            <button (click)="addStavka()" class="btn btn-primary col-md-2" style="margin-top: 0.5em;">Add</button>
         </div>
 
         <div>
             <table class="table table-bordered" style="margin-top: 1em;">
                 <thead>
                     <th class="col-md-2" scope="col">Redni broj</th>
-                    <th class="col-md-8" scope="col">Usluga</th>
+                    <th class="col-md-7" scope="col">Usluga</th>
                     <th class="col-md-2" scope="col">Cena</th>
-                    <th class="col-md-2" scope="col">Količina</th>
+                    <th class="col-md-3" scope="col">Količina</th>
+                    <th class="col-md-1" *ngIf="racun.status == 'KREIRAN'">Ukloni</th>
                 </thead>
                 <tbody>
                     <tr *ngFor="let stavka of racun.stavke">
@@ -46,12 +66,19 @@
                             {{stavka.usluga.cena}}</td>
                         <td class="col-md-2" name="fieldName" ngDefaultControl [(ngModel)]="stavka.kolicina">
                             {{stavka.kolicina}}</td>
+                        <td><button (click)="deleteStavka(stavka)" *ngIf="racun.status == 'KREIRAN'"
+                                class="btn-delete-stavka" style="margin-top: 0.5em;">—</button></td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
 
-    <button (click)="list()" class="btn btn-primary col-md-3" style="margin-top: 1.5em; margin-left: 0.5em; ">Nazad na
+    <div class="form-group" *ngIf="racun.status == 'KREIRAN'">
+        <button class="btn btn-info" (click)="sendRacun()" style="margin-top: 0.5em;">Pošaljite
+            račun</button>
+    </div>
+
+    <button (click)="list()" class="btn btn-primary col-md-3" style="margin-top: 1.5em;">Nazad na
         listu svih računa</button>
 </div>

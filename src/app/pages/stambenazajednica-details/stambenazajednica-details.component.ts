@@ -23,19 +23,19 @@ export class StambenazajednicaDetailsComponent implements OnInit {
 
   mesto!: Mesto[];
 
-  login:Login;
+  login: Login;
 
   constructor(private route: ActivatedRoute, private router: Router,
     private sZajednicaService: StambenaZajednicaService,
     private vlasnikService: VlasnikPosebnogDelaService,
-    private _mestoService: MestoService) { 
-      let user = localStorage.getItem("loggedUser"); 
-      if (user == null) {
-        user = "";
-        this.router.navigate(['']);
-      }
-      this.login = JSON.parse(user);
+    private _mestoService: MestoService) {
+    let user = localStorage.getItem("loggedUser");
+    if (user == null) {
+      user = "";
+      this.router.navigate(['']);
     }
+    this.login = JSON.parse(user);
+  }
 
   ngOnInit(): void {
     this.stambenaZajednica = new StambenaZajednica();
@@ -43,16 +43,23 @@ export class StambenazajednicaDetailsComponent implements OnInit {
     this.stambenaZajednicaId = this.route.snapshot.params['id'];
 
     this.sZajednicaService.getStambenaZajednicaByIdFromRemote(this.stambenaZajednicaId)
-      .subscribe(data => {
-        console.log(data)
-        this.stambenaZajednica = data;
-        this.vlasnikService.getAllVlasniciByStambenaZajednicaFromRemote(this.stambenaZajednica.stambenaZajednicaId, this.login).subscribe(data => {
-          console.log(data)
-          this.vlasnici = data;
+      .subscribe(
+        data => {
+          this.stambenaZajednica = data;
+          this.vlasnikService.getAllVlasniciByStambenaZajednicaFromRemote(this.stambenaZajednica.stambenaZajednicaId, this.login).subscribe(data => {
+            console.log(data)
+            this.vlasnici = data;
 
-        }, error => console.log(error));
+          }, error => {
+            console.log(error);
 
-      }, error => console.log(error));
+          });
+
+        }, error => {
+          console.log(error);
+          alert('Sistem ne može da nađe stambenu zajednicu po zadatoj vrednosti');
+          this.router.navigate(['moje-zgrade/home']);
+        });
     this.fillComboBoxMesta();
     this.selectedMesto = this.stambenaZajednica.mesto;
 
@@ -76,10 +83,17 @@ export class StambenazajednicaDetailsComponent implements OnInit {
   }
 
   updateStambenaZajednica() {
-    console.log(this.sZajednicaService.updateStambenaZajednicaFromRemote(this.stambenaZajednicaId, this.stambenaZajednica).subscribe(
-      data => console.log(data)
-    ));
-    alert("Stambena zajednica je uspešno sačuvana.");
+    this.sZajednicaService.updateStambenaZajednicaFromRemote(this.stambenaZajednicaId, this.stambenaZajednica)
+      .subscribe(
+        data => {
+          alert("Stambena zajednica je izmenjena");
+        },
+        error => {
+          console.log(error);
+          alert('Sistem ne može da zapamti stambenu zajednicu');
+        }
+      );
+
   }
 
 }

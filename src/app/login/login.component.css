@@ -1,0 +1,38 @@
+h1{
+    color: rgba(255, 255, 255, 0.685);
+    padding-top: 0.1em;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
+h2 {
+    margin-top: 2em;
+    padding-bottom: 1em;
+}
+
+button{
+    margin-top: 0.5em;
+}
+
+.deco{
+    height:60px;
+    background:#0d6efd;
+    width: 100%;
+}
+
+#deco-top{
+    bottom: 0;
+    position: absolute;
+}
+label{
+    font-size: 14pt;
+}
+
+button{
+    font-size: 14pt;
+}
+
+input{
+    font-size: 14pt;
+}
+
+

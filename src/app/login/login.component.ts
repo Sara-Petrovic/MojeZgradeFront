@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
       },
       error => {
         console.log("exception occured");
-        this.msg="Pogresan email i/ili lozinka. Molimo pokusajte ponovo.";
+        this.msg="Niste ispravno uneli korisničko ime ili lozinku";
       }
     );
   }

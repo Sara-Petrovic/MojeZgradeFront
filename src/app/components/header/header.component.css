@@ -1,8 +1,9 @@
 h1{
     color: rgba(255, 255, 255, 0.685);
-    margin-left: 0.5em;
-    margin-right: 0.5em;
+    margin-left: 1em;
+    margin-right: 4em;
 }
+
 a:hover{
     text-decoration: none;
 }
@@ -11,7 +12,7 @@ a:hover{
     background-color: #0d6efd;
     color: rgba(255, 255, 255, 0.685);
     padding: 0.5rem;
-    font-size: 16px;
+    font-size: 25px;
     border: none;
     margin: 0;
 }

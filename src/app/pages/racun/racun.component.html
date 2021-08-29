@@ -1,5 +1,5 @@
 <div class="container">
-    <h2 style="margin-top: 0.5em;">Moje zgrade</h2>
+    <h2 style="margin-top: 0.5em;">Kreiranje računa</h2>
 
     <form #racunform="ngForm" (ngSubmit)="saveRacun()">
         <small class="text-danger">{{msg}}</small>
@@ -18,15 +18,6 @@
                 [(ngModel)]="racun.datumIzdavanja ">
 
         </div>
-
-        <div class="form-group">
-            <label for="status">Status:</label>
-            <select [(ngModel)]="racun.status" class="form-control" name="status">
-                <option value="NEPLACEN"> Neplaćen</option>
-                <option value="PLACEN"> Plaćen</option>
-            </select>
-        </div>
-
         <button type="submit" class="btn btn-info col-md-3">Save</button>
     </form>
 

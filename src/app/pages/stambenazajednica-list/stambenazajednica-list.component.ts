@@ -22,6 +22,8 @@ export class StambenazajednicaListComponent implements OnInit {
   show: Array<boolean>;
   login: Login;
 
+  msg = '';
+
   constructor(private szService: StambenaZajednicaService,
     private router: Router) {
     this.show = new Array<boolean>(3);
@@ -54,12 +56,13 @@ export class StambenazajednicaListComponent implements OnInit {
     this.szService.deleteStambenaZajednicaFromRemote(id)
       .subscribe(
         data => {
-          console.log(data);
           this.reloadData();
+          alert("Stambena zajednica je obrisana");
         },
-        error => { 
-          console.log(error); 
-          alert("Stambena zajednica ne može dok postoje njeni vlasnici u bazi") 
+        error => {
+          console.log(error);
+          alert("Sistem ne može da obriše stambenu zajednicu");
+          alert("Potrebno je da prvo obrišete sve vlasnike koji vezani za ovu stambenu zajednicu.");
         });
   }
 
@@ -97,6 +100,13 @@ export class StambenazajednicaListComponent implements OnInit {
       this.zajednice = this.szService.getAllStambenaZajednicaFromRemoteForUser(this.login);
     } else {
       this.zajednice = this.szService.findStambenaZajednicaByUlicaIBrojFromRemote(this.login, this.ulica, this.broj);
+      this.zajednice.subscribe(data => {
+        console.log(data);
+          if (data.length == 0)
+            this.msg = 'Sistem ne može da nađe stambenu zajednicu po zadatoj vrednosti';
+          else
+            this.msg = '';
+        })
     }
   }
 

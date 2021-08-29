@@ -19,3 +19,19 @@ h2{
     padding-right: 1em;
     border: 1pt black solid;
 }
+
+label{
+    font-size: 15pt;
+}
+  
+input{
+    font-size: 15pt;
+}
+  
+button{
+    font-size: 15pt;
+}
+
+select{
+    font-size: 15pt;
+}

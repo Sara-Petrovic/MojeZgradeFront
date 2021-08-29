@@ -17,6 +17,8 @@ import { VlasnikUpdateComponent } from './pages/vlasnik-update/vlasnik-update.co
 import { VlasnikComponent } from './pages/vlasnik/vlasnik.component';
 import { HomeComponent } from './pages/home/home.component';
 import { SednicaUpdateComponent } from './pages/sednica-update/sednica-update.component';
+import { UslugaComponent } from './pages/usluga/usluga.component';
+import { RacunSendComponent } from './pages/racun-send/racun-send.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -30,25 +32,19 @@ const routes: Routes = [
       { path: 'vlasnikposebnogdela/:id', component: VlasnikListComponent },
       { path: 'vlasnici', component: VlasnikListComponent },
       { path: 'stambene-zajednice', component: StambenazajednicaListComponent },
-      // { path: 'loginsuccess/stambenazajednica', redirectTo: '/stambenazajednica', pathMatch: 'full' },
-      // { path: 'loginsuccess/stambene-zajednice', redirectTo: '/stambene-zajednice', pathMatch: 'full' },
-      // { path: 'loginsuccess/vlasnici', redirectTo: '/vlasnici', pathMatch: 'full' },
-      // { path: 'loginsuccess/vlasnikposebnogdela', redirectTo: '/vlasnikposebnogdela', pathMatch: 'full' },
       { path: 'updatevlasnik/:id', component: VlasnikUpdateComponent },
       { path: 'detailsvlasnik/:id', component: VlasnikDetailsComponent },
       { path: 'detailsstambenazajednica/:id', component: StambenazajednicaDetailsComponent },
       { path: 'racuni', component: RacunListComponent },
-      // { path: 'loginsuccess/racuni', redirectTo: '/racuni', pathMatch: 'full' },
       { path: 'racun', component: RacunComponent },
-      // { path: 'loginsuccess/racun', redirectTo: '/racun', pathMatch: 'full' },
       { path: 'detailsracun/:id', component: RacunDetailsComponent },
-      // { path: 'loginsuccess/sednicaskupstine', redirectTo: '/sednicaskupstine', pathMatch: 'full' },
-      // { path: 'loginsuccess/sednice', redirectTo: '/sednice', pathMatch: 'full' },
       { path: 'detailssednica/:id', component: SednicaDetailsComponent },
       { path: 'updatesednica/:id', component: SednicaUpdateComponent },
       { path: 'sednicaskupstine', component: SednicaCreateComponent },
       { path: 'sednice', component: SednicaListComponent },
-      { path: 'updatevlasnik/:id', component: VlasnikUpdateComponent }
+      { path: 'updatevlasnik/:id', component: VlasnikUpdateComponent },
+      { path: 'usluga', component: UslugaComponent },
+      {path: 'send-racun/:id', component: RacunSendComponent}
     ]
   }
 ];
